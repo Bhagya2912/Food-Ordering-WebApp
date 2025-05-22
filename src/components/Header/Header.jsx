@@ -80,17 +80,19 @@ const Header = () => {
   </span>
 </Link>
             {/* Wishlist Icon */}
-              <Link
-                to="/wishlist"
-                className=" ml-5 flex items-center gap-3 text-white hover:text-orange-500"
-              >
-                <Heart size={30} />
-              <span
-    className=" absolute top-5 right-6 sm:top-5 sm:right-13 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 transform translate-x-1/2 -translate-y-1/2"
-  > {wishlistCount}
-  </span>
-              </Link>
-          </div>
+             <Link
+  to="/wishlist"
+  className="ml-5 flex items-center text-white hover:text-orange-500 relative"
+>
+  <div className="relative">
+    <Heart size={30} />
+    <span
+      className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5"
+    >
+      {wishlistCount}
+    </span>
+  </div>
+</Link>         </div>
 
           {/* Mobile + Desktop Menu */}
           <div
