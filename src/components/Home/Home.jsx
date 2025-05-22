@@ -1,13 +1,22 @@
 import React,{useState,useEffect} from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
+import { assets, menu_list, food_list } from "../../assets/assets";
+import { useCart } from '../../context/CartContext';
+import { BsMenuButtonWideFill } from 'react-icons/bs';
+
 
 
 function Home({ name, image, price, rating }) {
 
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [favorites, setFavorites] = useState([]);
       const [current, setCurrent] = useState(0);
     const navigate=useNavigate();
+    const { addToCart } = useCart();
+    const { wishlistItems,addToWishlist } = useCart();
+
+    
+
 
     new Intl.NumberFormat('en-IN', {
   style: 'currency',
@@ -35,79 +44,23 @@ const testimonials = [
   },
 ];
 
-const specials = [
-  {
-    name: 'Paneer Tikka Pizza',
-    price: '₹249',
-    image: 'https://images.pexels.com/photos/11974635/pexels-photo-11974635.jpeg?auto=compress&cs=tinysrgb&w=600',
-    description: 'Crispy base loaded with paneer tikka, cheese & veggies.',
-  },
-  {
-    name: 'Butter Chicken Biryani',
-    price: '₹299',
-    image: 'https://media.istockphoto.com/id/1407172002/photo/indian-spicy-mutton-biryani-with-raita-and-gulab-jamun-served-in-a-dish-side-view-on-grey.jpg?s=2048x2048&w=is&k=20&c=LryyzbVQORB7SNV2UGshvBjwz3c_IK-rwa5Afv36Qlo=',
-    description: 'Aromatic rice cooked with butter chicken and spices.',
-  },
-  {
-    name: 'Masala Dosa',
-    price: '₹149',
-    image: 'https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg',
-    description: 'South Indian crepe with spicy potato filling.',
-  },
-  {
-    name: 'Cheese Garlic Naan',
-    price: '₹89',
-    image: 'https://images.pexels.com/photos/16851842/pexels-photo-16851842/free-photo-of-close-up-of-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-  },
-  {
-    name: 'Pav Bhaji',
-    price: '₹89',
-    image: 'https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-  },
-  {
-    name: "Pepperoni Pizza",
-    image: "https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?auto=compress&cs=tinysrgb&w=600",
-    price: "₹349",
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-  },
-  {
-    name: "Creamy Pasta",
-    image: "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-    price: "₹279",
-  },
-  {
-    name: "Healthy Salad",
-    image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=60",
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-    price: "₹149",
-  },
-  {
-    name: "Chocolate Dessert",
-    image: "https://images.pexels.com/photos/10381400/pexels-photo-10381400.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-    price: "₹199",
-  },
-  {
-    name: "misal paav",
-    image: "https://images.pexels.com/photos/17223838/pexels-photo-17223838/free-photo-of-plate-with-food.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: 'Soft naan stuffed with garlic and melting cheese.',
-    price: "₹199",
-  }
-  
-];
+const toggleFavorite = (index) => {
+    setFavorites((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index]
+    );
+  };
 
 
 const brands = [
-  'https://cdn.worldvectorlogo.com/logos/food-network.svg',
-  'https://cdn.worldvectorlogo.com/logos/food-network-3.svg',
-  'https://cdn.worldvectorlogo.com/logos/food-lion-5.svg',
-  'https://cdn.worldvectorlogo.com/logos/food-city.svg',
-   'https://cdn.worldvectorlogo.com/logos/china-food.svg',
-   'https://cdn.worldvectorlogo.com/logos/china-food.svg',
-   'https://cdn.worldvectorlogo.com/logos/china-food.svg',
+  'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-design-template-21c636096aeb4439217e7a2731d16f7d_screen.jpg?ts=1665470337',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVVIf86eibvCRG6Szxa_8xXN-_GEz-9pm2Q&s',
+  'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-restaurant-logo%2C-restaurant-logo-design-template-33255790cb8e1186b28609dd9afd4ee6_screen.jpg?ts=1668794604',
+  'https://i.pinimg.com/736x/fd/09/2f/fd092f0e23328564b7fb3d7021d1108d.jpg',
+   'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-%289%29-design-template-a498a5179cf7277f9fe66fe93f0024a5_screen.jpg?ts=1693343026',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjOCiE7tnCO-zNaURgwve4BwteaWq1dZh0zsNJmiRqkmDBJffjD9ZKouBDtpgtC68FrU0&usqp=CAU',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpCUHKXWUZ0393rBqMPuHjmdsVHwZEZZtE6nuyMF9ExNCMnbZ-V9irrBhWDGchN_BCr4&usqp=CAU',
 ];
 
   const allBrands = [...brands, ...brands]; 
@@ -143,14 +96,22 @@ const brands = [
         }
       `}</style>
      <div className="flex gap-4">
-  <button className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300">
-   Order Now
-  </button>
-  <button className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300">
-    Explore More    <i class="fa-solid fa-arrow-right"></i>
-  </button>
+ <Link
+      to="/menu"
+      className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300 inline-block text-center"
+    >
+      Order Now
+    </Link>
+    <Link
+      to="/menu"
+      className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300 inline-block text-center"
+    >
+      Explore More   <i class="fa-solid fa-arrow-right"></i>
+    </Link>
+ 
 </div>
       </header>
+      
 
       
 
@@ -174,7 +135,7 @@ const brands = [
 
       {/* Biryani */}
       <div className="flex gap-6">
-        <img className="w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/14731625/pexels-photo-14731625.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Biryani" />
+        <img className="cursor-pointer w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/14731625/pexels-photo-14731625.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Biryani" />
         <div>
           <h3 className="text-xl font-bold">Hyderabadi Biryani</h3>
           <p>Hyderabadi Biryani is a fragrant rice dish layered with marinated meat, saffron, fried onions, and herbs. It’s known for its royal taste and aroma.</p>
@@ -184,7 +145,7 @@ const brands = [
 
     {/* Masala Dosa */}
     <div className="flex gap-6">
-      <img className="w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Masala Dosa" />
+      <img className="cursor-pointer w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Masala Dosa" />
       <div>
         <h3 className="text-xl font-bold">Masala Dosa</h3>
         <p>Masala Dosa is a crispy South Indian crepe made from fermented rice and lentil batter, filled with spiced mashed potatoes and served with chutneys and sambar.</p>
@@ -203,8 +164,8 @@ const brands = [
            "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
             "https://images.pexels.com/photos/28445591/pexels-photo-28445591/free-photo-of-crispy-cheese-corn-momos-with-tangy-sauce.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"]
             .map((src, i) => (
-            <div key={i} className="relative group">
-              <img className="w-full h-60 object-cover" src={src} alt="Food gallery" />
+            <div key={i} className="cursor-pointer relative group">
+              <img className="cursor-pointer w-full h-60 object-cover" src={src} alt="Food gallery" />
               
                 <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition">
                   <h3 className="text-xl font-semibold mb-2">Delicious Dish</h3>
@@ -220,81 +181,72 @@ const brands = [
         </div>
       </section>
 
-     <section className="px-7 mt-10">
-  <div className="relative bg-[url('https://png.pngtree.com/background/20210710/original/pngtree-black-meat-western-food-banner-background-picture-image_1013905.jpg')]  bg-cover bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
+     <section className="relative bg-gradient-to-r px-7 mt-10 " >
+      
+      <div className="relative bg-[url('https://png.pngtree.com/background/20210710/original/pngtree-black-meat-western-food-banner-background-picture-image_1013905.jpg')]  bg-cover bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
   <section>
     <h1 className='flex items-center justify-center text-white text-4xl font-bold'>Hot & Fresh – Just for You!</h1>
   </section>
-  
-    <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
-      
-      <div className="flex animate-scroll gap-8 w-max">
-        {Array(2).fill([
-  {
-    name: "Cheese Burger",
-    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=60",
-    rating: 4.5,
-    price: "₹199",
-  },
-  {
-    name: "Pepperoni Pizza",
-    image: "https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?auto=compress&cs=tinysrgb&w=600",
-    rating: 4.8,
-    price: "₹349",
-  },
-  {
-    name: "Creamy Pasta",
-    image: "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600",
-    rating: 4.3,
-    price: "₹279",
-  },
-  {
-    name: "Healthy Salad",
-    image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=60",
-    rating: 4.1,
-    price: "₹149",
-  },
-  {
-    name: "Chocolate Dessert",
-    image: "https://images.pexels.com/photos/10381400/pexels-photo-10381400.jpeg?auto=compress&cs=tinysrgb&w=600",
-    rating: 4.9,
-    price: "₹199",
+      <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
+        <div className="flex animate-scroll gap-8 w-max">
+          {Array(2)
+            .fill(food_list.slice(0, 5))
+            .flat()
+            .map((item, index) => (
+              <div
+                key={index}
+                className="relative bg-white bg-opacity-90 rounded-xl shadow-lg p-4 w-60 shrink-0"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="cursor-pointer rounded-lg mb-2 w-full h-32 object-cover"
+                />
+                <h3 className="text-lg font-semibold">{item.name}</h3>
+                <p className="text-yellow-500 mb-1">
+                  {"★".repeat(Math.floor(item.rating))}
+                  {"☆".repeat(5 - Math.floor(item.rating))}
+                  <span className="text-sm text-gray-600 ml-2">
+                    ({item.rating})
+                  </span>
+                </p>
+                <p className="text-green-600 font-bold mb-2">₹{item.price}</p>
+                 <button
+  onClick={() =>
+    addToCart({
+      id: item.id, // Ensure `item.id` exists in your `food_list`
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      rating: item.rating
+    })
   }
-]
-).flat().map((item, index) => (
-          <div key={index} className="relative bg-white bg-opacity-90 rounded-xl shadow-lg p-4 w-60 shrink-0">
-  <img src={item.image} alt={item.name} className="rounded-lg mb-2 w-full h-32 object-cover" />
-  <h3 className="text-lg font-semibold">{item.name}</h3>
-  <p className="text-yellow-500 mb-1">
-    {"★".repeat(Math.floor(item.rating))}{"☆".repeat(5 - Math.floor(item.rating))}
-    <span className="text-sm text-gray-600 ml-2">({item.rating})</span>
-  </p>
-  <p className="text-green-600 font-bold mb-2">{item.price}</p>
-  <button className="bg-green-700 hover:bg-blue-600 text-white text-sm py-2 px-6 rounded-md">
-    Add to cart 
-  </button>
-
-  {/* Favorite Button */}
- <button
-  onClick={() => setIsFavorite(!isFavorite)}
-  className={`absolute bottom-4 right-1 text-2xl  rounded-md py-1 px-6 transition-colors  duration-300 ${
-    isFavorite
-      ? "bg-yellow-500 text-red-500 hover:bg-red-200"
-      : "bg-orange-600 text-yellow-200 hover:bg-yellow-200"
-  } shadow-md`}
+  className=" cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
 >
-  <i className={isFavorite ? "fas fa-heart" : "far fa-heart"}></i>
+  <i class="fa-solid fa-cart-plus"></i>
+  Add
 </button>
+                {/* Favorite Button */}
+                <button
+                 onClick={() =>
+  addToWishlist({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    image: item.image,
+    rating: item.rating
+  })
+}
 
-</div>
-
-        ))}
+  className=" cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
+>
+ <i class="fa-solid fa-heart"></i></button>
+              </div>
+            ))}
+        </div>
       </div>
-    </div>
-
-  </div>
-  
-</section>
+      </div>
+    </section>
 
  <section className="py-12 px-4 bg-orange-50 mt-10">
       <div className="max-w-7xl mx-auto text-center mb-10">
@@ -304,7 +256,7 @@ const brands = [
       </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 max-w-7xl mx-auto">
-        {specials.map((item, index) => (
+        {food_list.slice(1, 11).map((item, index) => (
           <div
             key={index}
            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
@@ -312,18 +264,44 @@ const brands = [
             <img
   src={item.image}
   alt={item.name}
-  className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
 />
 
             <div className="p-4">
               <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
               <p className="text-sm text-gray-600">{item.description}</p>
               <div className="flex justify-between items-center mt-4">
-                <span className="text-orange-600 font-semibold">{item.price}</span>
-                <button className="bg-orange-500 text-white text-sm px-4 py-1 rounded border border-transparent hover:border-white transition duration-300 hover:scale-105 shadow hover:shadow-orange-200 ">
-                  Add to cart
-                </button>
-                <button className='w-10 '><i class="fa-solid fa-heart"></i></button>
+                <span className="text-orange-600 font-semibold">₹{item.price}</span>
+                 <button
+  onClick={() =>
+    addToCart({
+      id: item.id, // Ensure `item.id` exists in your `food_list`
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      rating: item.rating
+    })
+  }
+  className=" cursor-pointer bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
+>
+  <i class="fa-solid fa-cart-plus"></i>
+  Add
+  
+</button>
+                <button
+                 onClick={() =>
+  addToWishlist({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    image: item.image,
+    rating: item.rating
+  })
+}
+
+  className=" cursor-pointer bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50  transition duration-300"
+>
+ <i class="fa-solid fa-heart"></i></button>
               </div>
             </div>
           </div>
@@ -370,6 +348,7 @@ const brands = [
 
        <section>
         <div className="overflow-hidden bg-[#f6f3ec] py-6 mb-5">
+          <h1 className="text-3xl font-bold text-center text-black mb-8">Popular Brands & Restaurant</h1>
       <div className="flex animate-scroll whitespace-nowrap">
         {allBrands.map((brand, index) => (
           <img

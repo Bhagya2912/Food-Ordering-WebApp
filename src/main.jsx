@@ -10,6 +10,14 @@ import Contact from './components/Contact/Contact.jsx'
 import Menu from './components/Menu/menu.jsx'
 import Login from './components/Login/Login.jsx'
 import SignUp from './components/SignUp/SignUp.jsx'
+import { CartProvider } from './context/CartContext.jsx'
+import Cart from './components/Cart/Cart.jsx'
+import Wishlist from './components/Wishlist/Wishlist.jsx'
+
+
+
+
+
 
 // const router = createBrowserRouter([{
 //        path: '/',
@@ -33,6 +41,7 @@ import SignUp from './components/SignUp/SignUp.jsx'
 
 const router =createBrowserRouter(
   createRoutesFromElements(
+      
     <Route path='/' element={<Layout/>}>
       <Route path='' element={<Home/>}></Route>
       <Route path='about' element={<About/>}></Route>
@@ -46,13 +55,22 @@ const router =createBrowserRouter(
        />
        <Route path='SignUp' element={<SignUp/>}/>
         <Route path='login' element={<Login/>}></Route>
+        <Route path="/Cart" element={<Cart />} />
+       <Route path="/wishlist" element={<Wishlist />} />
+        
     </Route>
+    
   )
 )
  
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <CartProvider>
+      <RouterProvider router={router}/>
+    </CartProvider>
+     
+ 
+   
   </StrictMode>,
 )

@@ -1,57 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { food_list } from "../../assets/assets";
+import { useCart } from "../../context/CartContext";
 
-const foodItems = [
-  {
-    name: "Classic Burger",
-    category: "Burger",
-    img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=900&auto=format&fit=crop",
-    description: "Juicy grilled beef with lettuce and tomato",
-    price: "$8.99"
-  },
-  {
-    name: "Cheesy Pizza",
-    category: "Pizza",
-    img: "https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Loaded with mozzarella cheese and toppings",
-    price: "$10.50"
-  },
-  {
-    name: "Fresh Salad",
-    category: "Salad",
-    img: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=60",
-    description: "A healthy mix of greens and veggies",
-    price: "$6.25"
-  },
-  {
-    name: "Spaghetti Pasta",
-    category: "Pasta",
-    img: "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Classic Italian pasta with tomato sauce",
-    price: "$9.75"
-  },
-  {
-    name: "Taco Fiesta",
-    category: "Taco",
-    img: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=900&auto=format&fit=crop",
-    description: "Spicy beef tacos with salsa",
-    price: "$7.50"
-  }
-];
 
 const Menu = () => {
   const [active, setActive] = useState(0);
+   const { addToCart } = useCart();
+   
 
   const prev = () => {
-    setActive((prev) => (prev === 0 ? foodItems.length - 1 : prev - 1));
-  };
+  setActive((prev) => (prev === 0 ? food_list.length - 1 : prev - 1));
+};
 
-  const next = () => {
-    setActive((prev) => (prev === foodItems.length - 1 ? 0 : prev + 1));
-  };
+const next = () => {
+  setActive((prev) => (prev === food_list.length - 1 ? 0 : prev + 1));
+};
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % foodItems.length);
+      setActive((prev) => (prev + 1) % food_list.length);
     }, 3500);
     return () => clearInterval(interval);
   }, []);
@@ -61,16 +30,18 @@ const Menu = () => {
 
   // Get 3 items in a looped manner
   const visibleItems = [
-    foodItems[startIndex % foodItems.length],
-    foodItems[(startIndex + 1) % foodItems.length],
-    foodItems[(startIndex + 2) % foodItems.length],
-    foodItems[(startIndex + 3) % foodItems.length],
-  ];
+  food_list[startIndex % food_list.length],
+  food_list[(startIndex + 1) % food_list.length],
+  food_list[(startIndex + 2) % food_list.length],
+  food_list[(startIndex + 3) % food_list.length],
+];
+  
+
   return (
     <>
       <section>
         <div className="relative w-full h-[570px] flex flex-col items-center justify-center overflow-hidden bg-cover bg-center text-white-500"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80')" }}
+          style={{ backgroundImage: "url('https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}
         >
           <h2 className="text-4xl font-bold text-white mb-8 italic underline">Menu</h2>
 
@@ -80,7 +51,7 @@ const Menu = () => {
             </button>
 
             <div className="relative flex justify-center items-center w-full h-full">
-              {foodItems.map((item, index) => {
+              {food_list.slice(1, 10).map((item, index) => {
                 const offset = index - active;
                 const isActive = index === active;
 
@@ -98,7 +69,7 @@ const Menu = () => {
                     }}
                     onClick={() => setActive(index)}
                   >
-                    <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                 );
               })}
@@ -110,8 +81,8 @@ const Menu = () => {
           </div>
 
           <div className="mt-6 text-center">
-            <h3 className="text-2xl font-semibold text-white">{foodItems[active].name}</h3>
-            <p className="text-sm uppercase text-white tracking-wide">{foodItems[active].category}</p>
+            <h3 className="text-2xl font-semibold text-white">{food_list[active].name}</h3>
+            <p className="text-sm uppercase text-white tracking-wide">{food_list[active].category}</p>
           </div>
         </div>
       </section>
@@ -129,7 +100,7 @@ const Menu = () => {
           
           {/* Static Image (centered absolutely) */}
           <div className="absolute w-32 h-32 rounded-full overflow-hidden z-10">
-            <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
           </div>
 
           {/* Rotating Dashed Border (in background) */}
@@ -137,13 +108,29 @@ const Menu = () => {
       </div>
                <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
       <p className="text-gray-500">{item.description}</p>
-      <p className="text-red-600 font-semibold text-lg mt-1">{item.price}</p>
+      <p className="text-red-600 font-semibold text-lg mt-1">₹{item.price}</p>
+     <button
+  onClick={() =>
+    addToCart({
+      id: item.id, // Ensure `item.id` exists in your `food_list`
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      rating: item.rating
+    })
+  }
+  className="bg-emerald-600 text-white py-1 px-4 rounded hover:bg-red-700 transition duration-300"
+>
+  Add to Cart
+</button>
+
             </div>
-            
           ))}
           
           
+          
         </div>
+        
          <style>
     {`
       @keyframes spin {
