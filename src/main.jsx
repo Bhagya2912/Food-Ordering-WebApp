@@ -13,6 +13,8 @@ import SignUp from './components/SignUp/SignUp.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import Cart from './components/Cart/Cart.jsx'
 import Wishlist from './components/Wishlist/Wishlist.jsx'
+import Productdetails from './components/Productdetails/Productdetails.jsx'
+import Checkout from './components/CheckOut/CheckOut.jsx'
 
 
 
@@ -43,6 +45,7 @@ const router =createBrowserRouter(
   createRoutesFromElements(
       
     <Route path='/' element={<Layout/>}>
+      
       <Route path='' element={<Home/>}></Route>
       <Route path='about' element={<About/>}></Route>
       <Route path='contact' element={<Contact/>}></Route>
@@ -57,6 +60,8 @@ const router =createBrowserRouter(
         <Route path='login' element={<Login/>}></Route>
         <Route path="/Cart" element={<Cart />} />
        <Route path="/wishlist" element={<Wishlist />} />
+       <Route path='product-detail' element={<Productdetails />} />
+      <Route path='checkout' element={<Checkout/>} />
         
     </Route>
     

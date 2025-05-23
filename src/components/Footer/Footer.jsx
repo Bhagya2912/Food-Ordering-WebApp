@@ -69,7 +69,12 @@ function Footer() {
           </div>
           <hr className="border-orange-500 w-16 mb-4" />
           <p className="text-gray-300 text-sm mb-4">
-            Phasellus ultricies aliquam volutpat ullamcorper laoreet neque, a lacinia curabitur lacinia mollis
+            “Craving. Click. Delivered. That’s the FoodieMoodie way.Your mood. Our food.Food that fits your mood.
+Serving smiles one bite at a time.
+
+Hungry? Let FoodieMoodie fix that."
+
+
           </p>
           <div className="flex space-x-4">
             <a href="#"><i className="fab fa-facebook-f border p-2 rounded hover:bg-white hover:text-black"></i></a>

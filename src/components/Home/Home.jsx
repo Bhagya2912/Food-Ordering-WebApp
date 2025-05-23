@@ -181,7 +181,7 @@ const brands = [
         </div>
       </section>
 
-     <section className="relative bg-gradient-to-r px-7 mt-10 " >
+     <section className="relative bg-gradient-to-r px-7 mt-10  " >
       
       <div className="relative bg-[url('https://png.pngtree.com/background/20210710/original/pngtree-black-meat-western-food-banner-background-picture-image_1013905.jpg')]  bg-cover bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
   <section>
@@ -198,19 +198,13 @@ const brands = [
                 className="relative bg-white bg-opacity-90 rounded-xl shadow-lg p-4 w-60 shrink-0"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
-                  className="cursor-pointer rounded-lg mb-2 w-full h-32 object-cover"
-                />
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-yellow-500 mb-1">
-                  {"★".repeat(Math.floor(item.rating))}
-                  {"☆".repeat(5 - Math.floor(item.rating))}
-                  <span className="text-sm text-gray-600 ml-2">
-                    ({item.rating})
-                  </span>
-                </p>
-                <p className="text-green-600 font-bold mb-2">₹{item.price}</p>
+  onClick={() => navigate("/product-detail", { state: item })}
+  src={item.image}
+  alt={item.name}
+  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+/>
+
+                
                  <button
   onClick={() =>
     addToCart({
@@ -221,7 +215,7 @@ const brands = [
       rating: item.rating
     })
   }
-  className=" cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
+  className="mt-5 cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
 >
   <i class="fa-solid fa-cart-plus"></i>
   Add
@@ -262,10 +256,12 @@ const brands = [
            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
           >
             <img
+  onClick={() => navigate("/product-detail", { state: item })}
   src={item.image}
   alt={item.name}
   className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
 />
+
 
             <div className="p-4">
               <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>

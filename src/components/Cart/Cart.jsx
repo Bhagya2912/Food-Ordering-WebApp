@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -9,6 +10,12 @@ const Cart = () => {
   const Shipping =50;
   const total = Shipping+subTotal - discount;
 
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
+
   return (
     <>
     {/* Hero Section */}
@@ -16,7 +23,7 @@ const Cart = () => {
       >
         
         <div className=" absolute  inset-0 bg-black bg-opacity-50 flex items-center justify-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
-          <h1 className="text-black text-5xl font-bold italic underline"  >Cart</h1>
+          <h1 className="text-black text-5xl font-bold italic underline"  >Your Cart</h1>
         </div>
       </div>
     <div className="p-8 bg-gray-100 min-h-screen">
@@ -26,14 +33,14 @@ const Cart = () => {
         
         {/* Cart Items */}
         <div className=" mt-5 md:col-span-2 bg-white p-6 rounded-lg shadow-md ">
-          <div className="grid grid-cols-4 text-left font-bold text-gray-700 border-b pb-4 mb-4 ">
-            <p>Product</p><p>Price</p><p>Quantity</p><p>Subtotal</p>
+          <div className="grid grid-cols-5 text-left font-bold text-gray-700 border-b pb-4 mb-4 ">
+            <p>Product</p><p>Price</p><p>Quantity</p><p>Subtotal</p><p className='absolute right-145'>Remove</p>
           </div>
 
           {cartItems.map((item) => (
-            <div key={item.id} className="grid grid-cols-4 items-center text-sm border-b py-4">
+            <div key={item.id} className="grid grid-cols-5 items-center text-sm border-b py-4">
               <div className="flex gap-4 items-center">
-                <button onClick={() => removeFromCart(item.id)} className="text-red-500 text-xl">×</button>
+                
                 <img src={item.image} alt={item.name} className="w-12 h-12 rounded-full object-cover " />
                 <div>
                   <p className="font-medium">{item.name}</p>
@@ -50,6 +57,7 @@ const Cart = () => {
               </div>
 
               <p>₹{(item.price * item.quantity).toFixed(2)}</p>
+              <button onClick={() => removeFromCart(item.id)} className="text-red-500 text-xl">×</button>
             </div>
           ))}
 
@@ -81,7 +89,8 @@ const Cart = () => {
             <div className="flex justify-between font-bold text-lg"><span>Total</span><span>₹{total.toFixed(2)}</span></div>
           </div>
 
-          <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 rounded text-sm font-semibold">
+          <button onClick={handleCheckout}
+           className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 rounded text-sm font-semibold">
             Proceed to Checkout
           </button>
         </div>

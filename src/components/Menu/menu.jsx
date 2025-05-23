@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { food_list } from "../../assets/assets";
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { menu_list } from "../../assets/assets";
+import { ChevronLeft, ChevronRight } from "lucide-react"; // or use HeroIcons or FontAwesome
 
 
 const Menu = () => {
   const [active, setActive] = useState(0);
    const { addToCart } = useCart();
+   const navigate = useNavigate();
    
 
   const prev = () => {
@@ -35,6 +39,16 @@ const next = () => {
   food_list[(startIndex + 2) % food_list.length],
   food_list[(startIndex + 3) % food_list.length],
 ];
+
+const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+  };
   
 
   return (
@@ -99,9 +113,13 @@ const next = () => {
         <div className="relative w-36 h-36 mx-auto mb-4 flex items-center justify-center">
           
           {/* Static Image (centered absolutely) */}
-          <div className="absolute w-32 h-32 rounded-full overflow-hidden z-10">
-            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-          </div>
+          <div className="absolute w-32 h-32 rounded-full overflow-hidden z-10"><img
+  onClick={() => navigate("/product-detail", { state: item })}
+  src={item.image}
+  alt={item.name}
+  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+/>
+ </div>
 
           {/* Rotating Dashed Border (in background) */}
           <div className="w-full h-full rounded-full border-2 border-dashed border-red-400 animate-rotate" />
@@ -146,6 +164,64 @@ const next = () => {
   </style>
 
       </div>
+
+      <style>
+  {`
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;     /* Firefox */
+    }
+  `}
+</style>
+
+      <section className="py-8 bg-[#fff8f0]  relative px-12">
+      <h2 className="text-4xl font-bold text-center text-Black mb-6">
+        Our Food Menu
+      </h2>
+
+      <div className="relative px-10">
+        {/* Left Scroll Button */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
+        >
+          <ChevronLeft className="w-6 h-6 text-orange-600" />
+        </button>
+
+        {/* Scrollable Menu */}
+        <div
+          ref={scrollRef}
+          className="flex  overflow-x-auto space-x-7 scrollbar-hide scroll-smooth"
+        >
+          {menu_list.map((item, index) => (
+            <div key={index} className="flex-shrink-0 text-center">
+              <img
+                src={item.menu_image}
+                alt={item.menu_name}
+                className="w-25 h-25 mx-auto object-cover rounded-full border-4 border-orange-200 hover:scale-110 transition-transform duration-300"
+              />
+              <h3 className="text-sm font-medium text-gray-700 mt-2">
+                {item.menu_name}
+              </h3>
+            </div>
+          ))}
+        </div>
+
+        {/* Right Scroll Button */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
+        >
+          <ChevronRight className="w-6 h-6 text-orange-600" />
+        </button>
+      </div>
+    </section>
+  
+
+      
     </>
   );
 };

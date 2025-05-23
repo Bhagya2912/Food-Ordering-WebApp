@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ShoppingCart, Heart, Search } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -146,23 +147,11 @@ const Header = () => {
             </ul>
 
             {/* Search and Wishlist - Desktop only */}
-            <div className="hidden lg:flex items-center gap-4 ml-4">
+            <div className="hidden text-white lg:flex items-center gap-4 ml-4">
               {/* Search Icon */}
              
-                <form className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="px-3 py-1 border text-white border-gray-300 bg-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
-                  />
-                  <button
-                    type="submit"
-                    className="text-white bg-orange-600 hover:bg-orange-700 px-3 py-1 rounded-full text-sm"
-                  >
-                    Search
-                  </button>
-                </form>
-              
+               
+              <SearchBar/>
 
 
             </div>
