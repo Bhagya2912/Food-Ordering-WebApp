@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+
 // Create the Cart context
 const CartContext = createContext();
+
 
 // Hook to use the CartContext
 export const useCart = () => useContext(CartContext);
@@ -29,6 +31,17 @@ export const CartProvider = ({ children }) => {
     }
   });
 
+  // Order history state
+  const [orderHistory, setOrderHistory] = useState(() => {
+    try {
+      const storedOrders = localStorage.getItem('orderHistory');
+      return storedOrders ? JSON.parse(storedOrders) : [];
+    } catch (error) {
+      console.error('Failed to parse order history from localStorage:', error);
+      return [];
+    }
+  });
+
   // Sync cart to localStorage
   useEffect(() => {
     try {
@@ -47,6 +60,15 @@ export const CartProvider = ({ children }) => {
     }
   }, [wishlistItems]);
 
+  // Sync order history to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+    } catch (error) {
+      console.error('Failed to save order history to localStorage:', error);
+    }
+  }, [orderHistory]);
+
   // Add item to cart
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -54,11 +76,11 @@ export const CartProvider = ({ children }) => {
       if (existingItem) {
         return prevItems.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
             : item
         );
       } else {
-        return [...prevItems, { ...product, quantity: 1 }];
+        return [...prevItems, { ...product, quantity: product.quantity || 1 }];
       }
     });
   };
@@ -98,6 +120,24 @@ export const CartProvider = ({ children }) => {
     setWishlistItems((prevItems) => prevItems.filter(item => item.id !== id));
   };
 
+  // Place order
+  const placeOrder = () => {
+    if (cartItems.length === 0) {
+      console.warn("Cannot place order: Cart is empty");
+      return;
+    }
+    const order = {
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      items: [...cartItems], // Clone to avoid mutating
+      total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      status: "Pending",
+    };
+    console.log("Order placed:", order); // Debug log
+    setOrderHistory((prevOrders) => [...prevOrders, order]);
+    clearCart();
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -108,11 +148,12 @@ export const CartProvider = ({ children }) => {
         clearCart,
         wishlistItems,
         addToWishlist,
-        removeFromWishlist
+        removeFromWishlist,
+        orderHistory,
+        placeOrder,
       }}
     >
       {children}
     </CartContext.Provider>
   );
 };
-
