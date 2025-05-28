@@ -32,9 +32,9 @@ const About = () => {
 
           {/* Text Content */}
           <div>
-            <h3 className="text-2xl font-semibold mb-4 text-red-600">Our Journey</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-orange-700">Our Journey</h3>
             <p className="text-gray-700 mb-6">
-              At <span className="font-semibold text-red-600">Zomato</span>, we bring you the richness of Indian cuisine from every region—North to South, East to West. 
+              At <span className="font-semibold text-orange-700">Zomato</span>, we bring you the richness of Indian cuisine from every region—North to South, East to West. 
               We started our journey with one mission: to celebrate the flavors that define our culture.
             </p>
             <p className="text-gray-700 mb-6">
@@ -43,7 +43,7 @@ const About = () => {
             </p>
             <button
       onClick={() => navigate('/menu')}
-      className="bg-red-600 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700 transition"
+      className="bg-orange-700 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700 transition"
     >
       Explore Our Menu
     </button>
@@ -51,23 +51,30 @@ const About = () => {
         </div>
 
         {/* Our Values */}
-        <div className="mt-20 grid md:grid-cols-3 gap-10 text-center">
-          <div>
-            <img src="https://cdn-icons-png.flaticon.com/512/2813/2813171.png" alt="Fresh" className="w-16 h-16 mx-auto mb-4" />
-            <h4 className="text-xl font-bold mb-2">Fresh Ingredients</h4>
-            <p className="text-gray-600">We prioritize farm-fresh vegetables, hand-ground spices, and premium ingredients.</p>
+        <div className="mt-20 grid md:grid-cols-3 gap-5 text-center">
+          <div className="bg-gradient-to-b from-green-50 to-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out text-center max-w-xs mx-auto">
+  <img 
+    src="https://cdn-icons-png.flaticon.com/512/2813/2813171.png" 
+    alt="Fresh" 
+    className="w-20 h-20 mx-auto mb-4 animate-bounce" 
+  />
+  <h4 className="text-2xl font-bold text-green-700 mb-2">Fresh Ingredients</h4>
+  <p className="text-gray-700 text-base leading-relaxed">
+    We prioritize farm-fresh vegetables,<br className="hidden md:inline"/> hand-ground spices, and premium ingredients.
+  </p>
+</div>
+
+
+          <div className="bg-gradient-to-b from-green-50 to-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out text-center max-w-xs mx-auto">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Authentic" className=" w-20 h-20 mx-auto mb-4 animate-bounce" />
+            <h4 className="text-2xl font-bold  text-green-700 mb-2">Authentic Taste</h4>
+            <p className="text-gray-700 text-base leading-relaxed">Traditional recipes passed down through generations with a modern twist.</p>
           </div>
 
-          <div>
-            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Authentic" className="w-16 h-16 mx-auto mb-4" />
-            <h4 className="text-xl font-bold mb-2">Authentic Taste</h4>
-            <p className="text-gray-600">Traditional recipes passed down through generations with a modern twist.</p>
-          </div>
-
-          <div>
-            <img src="https://cdn-icons-png.flaticon.com/512/1087/1087926.png" alt="Delivery" className="w-16 h-16 mx-auto mb-4" />
-            <h4 className="text-xl font-bold mb-2">Fast Delivery</h4>
-            <p className="text-gray-600">Hot and delicious meals delivered to your door in under 30 minutes.</p>
+          <div className="bg-gradient-to-b from-green-50 to-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out text-center max-w-xs mx-auto">
+            <img src="https://cdn-icons-png.flaticon.com/512/1087/1087926.png" alt="Delivery" className=" w-20 h-20 mx-auto mb-4 animate-bounce" />
+            <h4 className="text-2xl font-bold text-green-700 mb-2">Fast Delivery</h4>
+            <p className="text-gray-700 text-base leading-relaxed">Hot and delicious meals delivered to your door in under 30 minutes.</p>
           </div>
         </div>
       </div>

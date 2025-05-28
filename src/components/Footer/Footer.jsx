@@ -28,7 +28,7 @@ function Footer() {
 
   return (
        
-    <footer className="bg-[#070E16] text-white px-6 pt-0">
+    <footer className="bg-white text-black px-6 pt-0">
       {/* Top Contact Bar */}
       <div className="bg-orange-500 rounded-b-3xl p-6 lg:flex justify-between items-center text-white mb-12">
         {/* Address */}
@@ -49,6 +49,15 @@ function Footer() {
           </div>
         </div>
 
+        <div className="flex items-center gap-4 mb-6 lg:mb-0">
+         <div className="text-3xl"><i class="fa-regular fa-clock"></i></div>
+          <div>
+            <p className="text-sm font-medium">Monday – Friday: <span className="text-white-500">8am – 4pm</span></p>
+            <p className="text-lg font-semibold">Saturday: <span className="text-white-500">8am – 12am</span></p>
+          </div>
+        </div>
+
+
         {/* Call */}
         <div className="flex items-center gap-4">
           <div className="text-3xl"><i className="fas fa-phone"></i></div>
@@ -64,11 +73,11 @@ function Footer() {
         {/* Logo and Description */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-2xl font-bold text-white">FoodieMoodie</h2>
+            <h2 className="text-2xl font-bold text-black">FoodieMoodie</h2>
             <i className="fas fa-concierge-bell text-2xl text-orange-500"></i>
           </div>
           <hr className="border-orange-500 w-16 mb-4" />
-          <p className="text-gray-300 text-sm mb-4">
+          <p className="text-black text-sm mb-4">
             “Craving. Click. Delivered. That’s the FoodieMoodie way.Your mood. Our food.Food that fits your mood.
 Serving smiles one bite at a time.
 
@@ -112,24 +121,21 @@ Hungry? Let FoodieMoodie fix that."
 
         {/* Contact Us */}
         <div>
-          <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-          <hr className="border-orange-500 w-10 mb-4" />
-          <p className="text-gray-400 mb-2">Monday – Friday: <span className="text-orange-500">8am – 4pm</span></p>
-          <p className="text-gray-400 mb-4">Saturday: <span className="text-orange-500">8am – 12am</span></p>
+          <h3 className="text-xl font-bold mb-4">Subscribe</h3>
           <div className="flex items-center mb-4">
             <input
               type="email"
               placeholder="Your email address"
-              className="p-2 rounded-l bg-white text-black w-full"
+              className="p-2 rounded-l border-1 bg-white text-black w-full"
             />
-            <button className="bg-orange-500 p-2 rounded-r">
-              <i className="fas fa-arrow-right text-white"></i>
+            <button className="bg-orange-500 ml-1 p-2 rounded-r">
+              <i className="fas fa-arrow-right text-black"></i>
             </button>
           </div>
           <div className="flex items-center space-x-2">
             <input type="checkbox" id="policy" />
-            <label htmlFor="policy" className="text-sm text-gray-300">
-              I agree to the <a href="#" className="underline text-white">Privacy Policy.</a>
+            <label htmlFor="policy" className="text-sm text-black">
+              I agree to the <a href="#" className="underline text-black">Privacy Policy.</a>
             </label>
           </div>
           </div>

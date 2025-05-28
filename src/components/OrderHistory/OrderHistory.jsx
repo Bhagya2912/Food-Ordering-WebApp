@@ -67,12 +67,7 @@ const OrderHistory = () => {
             ))}
           </div>
         )}
-        <Link
-          to="/"
-          className="mt-6 inline-block text-white bg-orange-700 hover:bg-orange-800 px-4 py-2 rounded-lg"
-        >
-          Back to Home
-        </Link>
+       
       </div>
     </div>
     </>

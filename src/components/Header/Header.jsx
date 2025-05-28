@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from "../SearchBar/SearchBar";
 import { useCart } from "../../context/CartContext";
+import { faTags } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../assets/logo.png'; // ✅ Correct path
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,26 +35,22 @@ const Header = () => {
 
   return (
     <header className="shadow sticky z-50 top-0">
-      <nav className="bg-[#070E16] border-gray-200 px-4 lg:px-6 py-2.5">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           {/* Logo */}
           <Link to="/" className="hidden lg:flex items-center">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa5tsIAwU2JsxALAQei7ZeSzax8s2W4FusnkY5nsVJGEm8kxXz9lqQ_t-4IUkVCErhGG8&usqp=CAU"
-              className="mr-5 h-12"
-              alt="Logo"
-            />
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/9561/9561688.png"
-              className="mr-5 h-12"
-              alt="Logo"
-            />
-          </Link>
+  <img
+    src="https://png.pngtree.com/png-clipart/20230323/original/pngtree-cooking-logo-png-image_9001296.png"
+    className="mr-5 ml-10 w-auto h-30 max-h-12  object-contain"
+    alt="Logo"
+  />
+</Link>
+         
 
           {/* Hamburger Icon */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg lg:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="inline-flex items-center p-2 size-10 ml-3 text-sm text-black rounded-lg lg:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="mobile-menu"
             aria-expanded={menuOpen}
             aria-label="Toggle mobile menu"
@@ -63,27 +61,14 @@ const Header = () => {
           {/* Right-side buttons */}
           <div className="flex items-center lg:order-2">
             <Link
-              to="/login"
-              className="text-white hover:bg-black font-medium text-sm px-4 py-2 focus:outline-none"
-              aria-label="Log in"
-            >
-              Log in
-            </Link>
-            <Link
               to="/SignUp"
               className="text-white hover:bg-black font-medium text-sm px-4 py-2 focus:outline-none"
               aria-label="Sign up"
             >
-              Sign Up
+           
             </Link>
-            <Link
-              to="/"
-              className="hidden lg:flex text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
-              aria-label="Get started"
-            >
-              Get started
-            </Link>
-            <Link to="/cart" className="relative text-white" aria-label={`Cart with ${cartCount} items`}>
+            
+            <Link to="/cart" className="relative  text-black" aria-label={`Cart with ${cartCount} items`}>
               <FontAwesomeIcon icon={faCartPlus} className="text-2xl" />
               <span className="absolute -top-1 -right-3 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
                 {cartCount}
@@ -91,7 +76,7 @@ const Header = () => {
             </Link>
             <Link
               to="/wishlist"
-              className="ml-5 flex items-center text-white hover:text-orange-500 relative"
+              className="ml-5 flex items-center text-black hover:text-orange-500 relative"
               aria-label={`Wishlist with ${wishlistCount} items`}
             >
               <div className="relative">
@@ -100,6 +85,16 @@ const Header = () => {
                   {wishlistCount}
                 </span>
               </div>
+            </Link>
+            <Link
+              to="/login"
+              className="text-white ml-8 bg-orange-600 text-sm px-4 py-2 rounded font-semibold  focus:outline-none"
+              aria-label="Log in"
+               /* w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 rounded text-sm font-semibold */
+            >
+             
+              Login {' '}
+              <i class="fa-solid fa-user"></i>
             </Link>
           </div>
 
@@ -115,8 +110,9 @@ const Header = () => {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-black"} hover:text-orange-700`
                   }
+                  onClick={() => setMenuOpen(false)}
                   aria-label="Home"
                 >
                   Home
@@ -126,8 +122,9 @@ const Header = () => {
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-black"} hover:text-orange-700`
                   }
+                  onClick={() => setMenuOpen(false)}
                   aria-label="About"
                 >
                   About
@@ -137,8 +134,9 @@ const Header = () => {
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-Black"} hover:text-orange-700`
                   }
+                  onClick={() => setMenuOpen(false)}
                   aria-label="Contact"
                 >
                   Contact
@@ -148,8 +146,9 @@ const Header = () => {
                 <NavLink
                   to="/menu"
                   className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-black"} hover:text-orange-700`
                   }
+                  onClick={() => setMenuOpen(false)}
                   aria-label="Menu"
                 >
                   Menu
@@ -159,7 +158,7 @@ const Header = () => {
                 <NavLink
                   to="/Other"
                   className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700 flex items-center`
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-black"} hover:text-orange-700 flex items-center`
                   }
                   onClick={toggleSidebar}
                   aria-label="Open additional options"
@@ -169,7 +168,7 @@ const Header = () => {
               </li>
             </ul>
 
-            <div className="hidden text-white lg:flex items-center gap-4 ml-4">
+            <div className="hidden text-black lg:flex items-center gap-4 ml-4">
               <SearchBar />
             </div>
           </div>
@@ -208,7 +207,8 @@ const Header = () => {
                       onClick={toggleSidebar}
                       aria-label="Account settings"
                     >
-                      Settings
+                      Settings{' '}
+                      <i class="fa-solid fa-gear" style={{ color: 'orange' }}></i>
                     </Link>
                   </li>
                   <li>
@@ -234,30 +234,35 @@ const Header = () => {
               </li>
                   <li>
                     <Link
-                      to="/order"
-                      className="text-white hover:text-orange-500"
-                      onClick={toggleSidebar}
+                      to="/Offer"
+                     className={({ isActive }) =>
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    }
                       aria-label="Place a new order"
                     >
-                     Offer
+                  <span className="text-sm font-medium">Offers</span>{' '}
+                  <FontAwesomeIcon icon={faTags} className="text-orange-600 mr-2" />
                     </Link>
                   </li>
                    <li>
-                    <Link
-                      to="/"
-                      className="text-white hover:text-orange-500"
-                      onClick={toggleSidebar}
-                      aria-label="Place a new order"
-                    >
-                     Logout
-                    </Link>
-                  </li>
+                <Link
+  to="/"
+  className={({ isActive }) =>
+    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+  }
+  onClick={toggleSidebar} // no event passed, no preventDefault
+  aria-label="Logout"
+>
+  Logout <i className="fa-solid fa-arrow-right-from-bracket" style={{color:"orange"}}></i>
+</Link>
+
+              </li>
                   <button
                   onClick={toggleSidebar}
-                  className="mb-4 text-white bg-orange-500 hover:bg-orange-600 px-3 py-1 rounded-lg focus:outline-none"
+                  className="cursor-pointer mb-4 text-white bg-orange-500 hover:bg-orange-600 px-3 py-1 rounded-lg focus:outline-none"
                   aria-label="Close sidebar"
                 >
-                  Close 
+                  Close
                 </button>
                 </ul>
               </div>

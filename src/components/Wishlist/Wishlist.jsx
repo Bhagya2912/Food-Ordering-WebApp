@@ -61,16 +61,26 @@ function Wishlist() {
 
               {/* Add to cart button */}
               <button
-                onClick={() => addToCart(item)}
-                className="bg-red-600 hover:bg-red-300 text-white font-bold px-4 py-2 rounded-lg mr-4"
-              >
-               Add to cart
-              </button>
+  onClick={() =>
+    addToCart({
+      id: item.id, // Ensure `item.id` exists in your `food_list`
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      rating: item.rating
+    })
+  }
+  className=" cursor-pointer bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
+>
+   <i class="fa-solid fa-cart-plus"></i>{'  '} 
+  Add
+ 
+</button>
 
               {/* Delete icon */}
               <button
                 onClick={() => removeFromWishlist(item.id)}
-                className="text-red-500 hover:text-red-700 text-xl"
+                className="text-red-500 hover:text-red-700 ml-5 text-xl"
               >
                 <FaTrashAlt />
               </button>

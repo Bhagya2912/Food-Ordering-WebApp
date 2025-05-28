@@ -10,8 +10,16 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+    filterItems(value);
+  };
+
+  const handleIconClick = () => {
+    filterItems(searchTerm);
+  };
+
+  const filterItems = (term) => {
     const results = food_list.filter(item =>
-      item.name.toLowerCase().includes(value.toLowerCase())
+      item.name.toLowerCase().includes(term.toLowerCase())
     );
     setFilteredItems(results);
   };
@@ -24,31 +32,36 @@ const SearchBar = () => {
 
   return (
     <div className="relative">
-      <div className="flex">
+      <div className="relative w-full max-w-xs">
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Search..."
-          className="rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="w-100 rounded-full px-10 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
-        <button className="ml-2 bg-orange-600 text-white px-4 py-2 rounded-full">Search</button>
+        <button
+          onClick={handleIconClick}
+          className="absolute left-90 top-1/2 transform -translate-y-1/2 text-black hover:text-orange-500 focus:outline-none"
+        >
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
 
       {searchTerm && (
-        <ul className="absolute bg-black mt-1 w-full rounded shadow z-10 max-h-60 overflow-y-auto">
+        <ul className="absolute bg-white mt-1 w-full rounded shadow z-10 max-h-60 overflow-y-auto">
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => (
               <li
                 key={index}
-                className="p-2  cursor-pointer"
+                className="p-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSelectItem(item)}
               >
                 {item.name}
               </li>
             ))
           ) : (
-            <li className="p-2 text-white italic cursor-default">
+            <li className="p-2 text-black italic cursor-default">
               Item not found
             </li>
           )}
@@ -59,4 +72,5 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
 

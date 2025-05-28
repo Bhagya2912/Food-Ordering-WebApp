@@ -16,6 +16,7 @@ import Wishlist from './components/Wishlist/Wishlist.jsx'
 import Productdetails from './components/Productdetails/Productdetails.jsx'
 import CheckOut from './components/CheckOut/CheckOut.jsx'
 import OrderHistory from './components/OrderHistory/OrderHistory.jsx'
+import Offer from './components/Offer/Offer.jsx'
 
 
 
@@ -47,7 +48,7 @@ const router =createBrowserRouter(
       
     <Route path='/' element={<Layout/>}>
       
-      <Route path='' element={<Home/>}></Route>
+      <Route index element={<Home />} />
       <Route path='about' element={<About/>}></Route>
       <Route path='contact' element={<Contact/>}></Route>
       
@@ -63,6 +64,7 @@ const router =createBrowserRouter(
        <Route path="/wishlist" element={<Wishlist />} />
        <Route path="/order-history" element={<OrderHistory />} />
        <Route path='product-detail' element={<Productdetails />} />
+       <Route path='Offer' element={<Offer />} />
       <Route path='checkout' element={<CheckOut/>} />
         
     </Route>

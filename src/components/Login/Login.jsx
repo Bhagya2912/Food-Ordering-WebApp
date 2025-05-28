@@ -7,7 +7,7 @@ const Login = () => {
         {/* Left Image */}
         <div className="md:w-1/2 h-64 md:h-auto">
           <img
-            src="https://images.pexels.com/photos/750073/pexels-photo-750073.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://blog.foodhub.com/wp-content/uploads/2023/12/Foodhub-Tryfh.png"
             alt="Food"
             className="w-full h-full object-cover"
           />
@@ -36,7 +36,7 @@ const Login = () => {
             />
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full hover:bg-orange-600 transition"
+              className="w-full bg-orange-500 text-white font-semibold py-3 rounded hover:bg-orange-600 transition"
             >
               Login
             </button>
@@ -67,7 +67,7 @@ const Login = () => {
               rel="noopener noreferrer"
               className="text-red-600 hover:scale-110 transition"
             >
-              <i className="fab fa-google-plus-g"></i>
+              <i class="fa-brands fa-google"></i>
             </a>
           </div>
 

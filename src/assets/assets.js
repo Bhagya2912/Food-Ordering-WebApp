@@ -48,6 +48,23 @@ import food_29 from './food_29.png'
 import food_30 from './food_30.png'
 import food_31 from './food_31.png'
 import food_32 from './food_32.png'
+import food_33 from './food_33.png'
+import food_34 from './food_34.png'
+import food_35 from './food_35.png'
+import food_36 from './food_36.png'
+import food_37 from './food_37.png'
+import food_38 from './food_38.png'
+import food_39 from './food_39.png'
+import food_40 from './food_40.png'
+import food_41 from './food_41.png'
+import food_42 from './food_42.png'
+import food_43 from './food_43.png'
+import food_44 from './food_44.png'
+import food_45 from './food_45.png'
+import food_46 from './food_46.png'
+import food_47 from './food_47.png'
+import food_48 from './food_48.png'
+import food_49 from './food_49.png'
 
 import add_icon_white from './add_icon_white.png'
 import add_icon_green from './add_icon_green.png'
@@ -372,5 +389,137 @@ export const food_list = [
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Noodles"
+    },{
+        id: "33",
+        name: "chicken Kari",
+        image: food_33,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Non-Veg"
+    },{
+        id: "34",
+        name: "chicken kabab",
+        image: food_34,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Non-Veg"
+    },{
+        id: "35",
+        name: "Orange juice",
+        image: food_35,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "drink"
+    },
+    {
+        id: "36",
+        name: "Sugarcane  juice",
+        image: food_36,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "drink"
+    },
+    {
+        id: "37",
+        name: "Straberry juice",
+        image: food_37,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "drink"
+    },{
+        id: "38",
+        name: "chicken Biryani",
+        image: food_39,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Biryani"
+    },{
+        id: "39",
+        name: "Veg Biryani",
+        image: food_38,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Biryani"
+    },
+    {
+        id: "40",
+        name: "Hydrabadi Biryani",
+        image: food_40,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Biryani"
+    },
+    {
+        id: "41",
+        name: "Dam Biryani",
+        image: food_41,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Biryani"
+    },{
+        id: "42",
+        name: "Pohe",
+        image: food_42,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Breakfast"
+    },{
+        id: "43",
+        name: "Idali",
+        image: food_43,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Breakfast"
+    },
+    {
+        id: "44",
+        name: "Dosa",
+        image: food_44,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Breakfast"
+    },
+    {
+        id: "45",
+        name: "Anda Bhurji",
+        image: food_45,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Breakfast"
+    },
+    {
+        id: "46",
+        name: "Paneer Pizza",
+        image: food_46,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "pizza"
+    },
+    {
+        id: "47",
+        name: "PepRoni Pizza",
+        image: food_47,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "pizza"
+    },
+    {
+        id: "48",
+        name: "Classic Pizza",
+        image: food_48,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "pizza"
+    },
+    {
+        id: "49",
+        name: "MoJo Pizza",
+        image: food_45,
+        price: 15,
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "pizza"
     }
+
+
 ]
+

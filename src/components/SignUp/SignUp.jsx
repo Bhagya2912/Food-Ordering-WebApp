@@ -9,7 +9,7 @@ const SignUp = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')",
+          "url('https://cdn.pixabay.com/photo/2015/04/10/00/41/food-715542_1280.jpg')",
       }}
     >
       <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg w-full max-w-md">
@@ -56,12 +56,7 @@ const SignUp = () => {
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-700 mt-4">
-          Already have an account?{' '}
-          <a href="/login" className="text-orange-600 font-semibold underline">
-            Login here
-          </a>
-        </p>
+        
       </div>
     </div>
        );

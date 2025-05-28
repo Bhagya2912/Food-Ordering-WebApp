@@ -285,7 +285,7 @@ const Checkout = () => {
             ))}
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded px-5 py-2 mt-2 transition-colors w-full"
+              className="bg-orange-600  text-white font-semibold rounded px-5 py-2 mt-2 transition-colors w-full"
             >
               {editingIndex !== null ? 'Update Address' : 'Add Address'}
             </button>
@@ -341,7 +341,7 @@ const Checkout = () => {
               <p className="text-gray-600">Please select a delivery address to proceed.</p>
               <button
                 onClick={closeAddressAlert}
-                className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded w-full transition-colors"
+                className="bg-orange-600  text-white font-semibold py-2 px-4 rounded w-full transition-colors"
               >
                 OK
               </button>

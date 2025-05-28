@@ -55,11 +55,11 @@ const toggleFavorite = (index) => {
 
 const brands = [
   'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-design-template-21c636096aeb4439217e7a2731d16f7d_screen.jpg?ts=1665470337',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVVIf86eibvCRG6Szxa_8xXN-_GEz-9pm2Q&s',
+  'https://img.freepik.com/premium-vector/online-food-order-logo-icon_61778-45.jpg',
   'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-restaurant-logo%2C-restaurant-logo-design-template-33255790cb8e1186b28609dd9afd4ee6_screen.jpg?ts=1668794604',
-  'https://i.pinimg.com/736x/fd/09/2f/fd092f0e23328564b7fb3d7021d1108d.jpg',
+  'https://images-platform.99static.com//Ba6VdSQsbU4OpiyQEzLi7yHy9KQ=/440x521:1494x1575/fit-in/500x500/99designs-contests-attachments/127/127439/attachment_127439993',
    'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-%289%29-design-template-a498a5179cf7277f9fe66fe93f0024a5_screen.jpg?ts=1693343026',
-   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjOCiE7tnCO-zNaURgwve4BwteaWq1dZh0zsNJmiRqkmDBJffjD9ZKouBDtpgtC68FrU0&usqp=CAU',
+   'https://previews.123rf.com/images/miracel123/miracel1231801/miracel123180100795/94312687-food-delivery-logo.jpg',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpCUHKXWUZ0393rBqMPuHjmdsVHwZEZZtE6nuyMF9ExNCMnbZ-V9irrBhWDGchN_BCr4&usqp=CAU',
 ];
 
@@ -67,20 +67,32 @@ const brands = [
 
 
   return (
-    <div className="font-sans text-gray-800 mr-auto">
-      {/* Hero Section */}
-      <header className="relative bg-cover bg-center h-screen flex flex-col justify-center items-center text-white bg-black/60 
-       object-cover animate-[zoomInOut_10s_ease-in-out_infinite]" style={{ backgroundImage: `url('https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')` }}>
-        <div className="text-center">
-          
-          <section className="flex items-center justify-center ">
-  <h1 className="flex items-center justify-center text-white text-5xl font-serif font-semibold drop-shadow-lg max-w-xl text-center px-4">
-    Experience the Rich Flavors <br /> of Traditional Indian Cuisine
+   <div className="font-sans text-gray-800 mr-auto">
+  {/* Hero Section */}
+  <header className="relative h-screen flex flex-col justify-center items-center text-white overflow-hidden">
+    {/* Animated Background Layer */}
+    <div
+      className="absolute inset-0 bg-cover bg-center header-bg-zoom"
+      style={{
+        backgroundImage: `url('https://cdn.pixabay.com/photo/2023/05/29/17/01/hamburger-8026582_1280.jpg')`,
+      }}
+    >
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/30"></div>
+    </div>
+
+    {/* Foreground Content */}
+    <div className="text-center relative z-10">
+      {/* Heading Section */}
+<section className="flex items-center justify-center px-4 py-6 sm:py-8">
+  <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-semibold drop-shadow-lg max-w-md sm:max-w-xl text-center leading-snug sm:leading-normal">
+    Experience the Rich Flavors  of Traditional Indian Cuisine
   </h1>
 </section>
 
-          <section className="max-w-4xl mx-auto px-6 py-12 text-center">
-  <p className="text-gray-200 text-lg leading-relaxed font-serif">
+{/* Paragraph Section */}
+<section className="max-w-md sm:max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8 text-center">
+  <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed font-serif">
     Discover the vibrant aromas and timeless recipes of India — a land where spices tell stories,
     and every meal is a celebration. From the creamy butter chicken of the North to the fiery
     curries of the South, our curated dishes invite you to savor the authentic tastes passed
@@ -88,27 +100,44 @@ const brands = [
   </p>
 </section>
 
-        </div>
-         <style>{`
-        @keyframes zoomInOut {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.1); }
+
+
+        
+        <style>
+    {`
+      @keyframes zoomInOut {
+        0%, 100% {
+          transform: scale(1);
         }
-      `}</style>
-     <div className="flex gap-4">
- <Link
-      to="/menu"
-      className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300 inline-block text-center"
-    >
-      Order Now
-    </Link>
-    <Link
-      to="/menu"
-      className="bg-red-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-900 transition duration-300 inline-block text-center"
-    >
-      Explore More   <i class="fa-solid fa-arrow-right"></i>
-    </Link>
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .header-bg-zoom {
+        animation: zoomInOut 10s ease-in-out infinite;
+      }
+    `}
+  </style>
+
  
+
+
+         
+   <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+  <Link
+    to="/menu"
+    className="bg-orange-600 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-300 text-center sm:w-auto"
+  >
+    Order Now
+  </Link>
+  <Link
+    to="/menu"
+    className="bg-orange-600 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-300 text-center  sm:w-auto"
+  >
+    Explore More <i className="fa-solid fa-arrow-right ml-2"></i>
+  </Link>
+</div>
 </div>
       </header>
       
@@ -118,133 +147,206 @@ const brands = [
       
 
      {/* Skills / Ingredients Section */}
-<section className="py-12 px-4 bg-white">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-3xl font-semibold mb-8 text-center">Popular Indian Dishes</h2>
+<section className="py-12 px-4 bg-white ">
+  <div className="max-w-6xl mx-auto lg:px-6 py-2.5">
+    <h2 className="text-4xl font-bold text-red-600  mb-8 text-center">Popular  Dishes</h2>
 
     {/* Dish Cards Grid */}
-    <div className="grid md:grid-cols-2 gap-10 mb-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
       {/* Paneer Butter Masala */}
-      <div className="flex gap-6">
-        <img className="w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Paneer Butter Masala" />
-        <div>
-          <h3 className="text-xl font-bold">Paneer Butter Masala</h3>
-          <p>A creamy, mildly spiced North Indian curry made with soft paneer cubes, tomatoes, cashews, and butter. A favorite in every Indian restaurant.</p>
-        </div>
-      </div>
-
-      {/* Biryani */}
-      <div className="flex gap-6">
-        <img className="cursor-pointer w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/14731625/pexels-photo-14731625.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Biryani" />
-        <div>
-          <h3 className="text-xl font-bold">Hyderabadi Biryani</h3>
-          <p>Hyderabadi Biryani is a fragrant rice dish layered with marinated meat, saffron, fried onions, and herbs. It’s known for its royal taste and aroma.</p>
-        </div>
-      </div>
+     {/* Paneer Butter Masala */}
+  <div className="flex flex-col md:flex-row gap-6">
+     <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600.jpg"
+        alt="Paneer Butter Masala"
+      />
+    <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
     </div>
-
-    {/* Masala Dosa */}
-    <div className="flex gap-6">
-      <img className="cursor-pointer w-40 h-40 object-cover rounded-lg" src="https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg" alt="Masala Dosa" />
-      <div>
-        <h3 className="text-xl font-bold">Masala Dosa</h3>
-        <p>Masala Dosa is a crispy South Indian crepe made from fermented rice and lentil batter, filled with spiced mashed potatoes and served with chutneys and sambar.</p>
-      </div>
+    <div>
+      <h3 className="text-xl font-bold">Paneer Butter Masala</h3>
+      <p>A creamy, mildly spiced North Indian curry made with soft paneer cubes, tomatoes, cashews, and butter. A favorite in every Indian restaurant.</p>
     </div>
   </div>
-</section>
+
+  {/* Hyderabadi Biryani */}
+  <div className="flex flex-col md:flex-row gap-6">
+     <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/14731625/pexels-photo-14731625.jpeg?auto=compress&cs=tinysrgb&w=600.jpg"
+        alt="Biryani"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Hyderabadi Biryani</h3>
+      <p>Hyderabadi Biryani is a fragrant rice dish layered with marinated meat, saffron, fried onions, and herbs. It’s known for its royal taste and aroma.</p>
+    </div>
+  </div>
+
+  {/* Masala Dosa */}
+ <div className="flex flex-col md:flex-row gap-6">
+     <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg"
+        alt="Masala Dosa"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Masala Dosa</h3>
+      <p>Masala Dosa is a crispy South Indian crepe made from fermented rice and lentil batter, filled with spiced mashed potatoes and served with chutneys and sambar.</p>
+    </div>
+  </div>
+
+ {/* Noodles */}
+<div className="flex flex-col md:flex-row gap-6">
+  <div className="relative w-full sm:max-w-md mx-auto h-40">
+    <img
+      className="w-full h-full object-cover rounded-lg cursor-pointer"
+      src="https://i.imgur.com/1Ss39Hq.jpg"
+      alt="Noodles"
+    />
+    <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+      <span className="text-sm font-medium mb-2">Delicious Dish</span>
+      <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+    </div>
+  </div>
+  <div>
+    <h3 className="text-xl font-bold">Noodles</h3>
+    <p>Noodles are a versatile and beloved dish, often served with vegetables, sauces, and proteins. This version features a tangy and spicy flavor profile perfect for any craving.</p>
+  </div>
+</div>
 
 
-      {/* Gallery Section */}
-      <section className="bg-gray-100 py-12 px-4 ">
-        <h1 className='flex items-center justify-center text-black text-4xl font-bold mb-5'>Our Top Dishes</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
-          {["https://i.imgur.com/1Ss39Hq.jpg", "https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"
-          , "https://i.imgur.com/ZkDcLbW.jpg", "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
-           "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
-            "https://images.pexels.com/photos/28445591/pexels-photo-28445591/free-photo-of-crispy-cheese-corn-momos-with-tangy-sauce.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"]
-            .map((src, i) => (
-            <div key={i} className="cursor-pointer relative group">
-              <img className="cursor-pointer w-full h-60 object-cover" src={src} alt="Food gallery" />
-              
-                <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition">
-                  <h3 className="text-xl font-semibold mb-2">Delicious Dish</h3>
-                  <button className="bg-white text-black px-4 py-2 rounded">Read more</button>
-                </div>
-              
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-6">
+
+  {/* Uttapam */}
+ <div className="flex flex-col md:flex-row gap-6">
+    <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"
+        alt="Uttapam"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Uttapam</h3>
+      <p>A soft and thick South Indian pancake made from fermented rice and urad dal batter, topped with chopped onions, tomatoes, green chilies, and coriander.</p>
+    </div>
+  </div>
+
+  {/* Sushi */}
+  <div className="flex flex-col md:flex-row gap-6">
+    <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://i.imgur.com/ZkDcLbW.jpg"
+        alt="Sushi"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Sushi</h3>
+      <p>A traditional Japanese dish made with vinegared rice, seafood or vegetables, and wrapped in seaweed. Often served with wasabi, soy sauce, and pickled ginger.</p>
+    </div>
+  </div>
+
+  {/* Pasta */}
+ <div className="flex flex-col md:flex-row gap-6">
+     <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"
+        alt="Pasta"
+      />
+      <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Pasta</h3>
+      <p>A classic Italian dish made from durum wheat, typically tossed in sauces like tomato, Alfredo, or pesto. Served with herbs and grated cheese.</p>
+    </div>
+  </div>
+
+  {/* Burger */}
+  <div className="flex flex-col md:flex-row gap-6">
+    <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"
+        alt="Burger"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Burger</h3>
+      <p>A popular American-style sandwich consisting of a grilled meat or veggie patty, fresh lettuce, tomato, cheese, and sauces, all stacked between two buns.</p>
+    </div>
+  </div>
+
+  {/* Fried Momos */}
+  <div className="flex flex-col md:flex-row gap-6">
+    <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/28445591/pexels-photo-28445591/free-photo-of-crispy-cheese-corn-momos-with-tangy-sauce.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg"
+        alt="Fried Momos"
+      />
+        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Fried Momos</h3>
+      <p>Crispy pan-fried dumplings filled with a delicious mixture of vegetables or minced meat, seasoned with spices. Served hot with spicy red chutney.</p>
+    </div>
+  </div>
+
+  {/* Chicken */}
+ <div className="flex flex-col md:flex-row gap-6">
+     <div className="relative w-full sm:max-w-md mx-auto h-40">
+      <img className="w-full h-full object-cover rounded-lg cursor-pointer"
+        src="https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=600"
+        alt="Chicken"
+      />
+       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
+  <span className="text-sm font-medium mb-2">Delicious Dish</span>
+  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+</div>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold">Chicken</h3>
+      <p>Tender pieces of chicken cooked in aromatic Indian spices, either grilled, fried, or in curry form. Rich in flavor and served with naan or rice.</p>
+    </div>
+  </div>
+  </div>
+      <div className="text-center mt-6">
           <button onClick={() => navigate('/menu')}
-          className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full">View more</button>
+          className="bg-orange-600 hover:bg-orange-700 text-white justify-center mt-5 px-6 py-2 rounded">View more</button>
         </div>
-      </section>
-
-     <section className="relative bg-gradient-to-r px-7 mt-10  " >
-      
-      <div className="relative bg-[url('https://png.pngtree.com/background/20210710/original/pngtree-black-meat-western-food-banner-background-picture-image_1013905.jpg')]  bg-cover bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
-  <section>
-    <h1 className='flex items-center justify-center text-white text-4xl font-bold'>Hot & Fresh – Just for You!</h1>
-  </section>
-      <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
-        <div className="flex animate-scroll gap-8 w-max">
-          {Array(2)
-            .fill(food_list.slice(0, 5))
-            .flat()
-            .map((item, index) => (
-              <div
-                key={index}
-                className="relative bg-white bg-opacity-90 rounded-xl shadow-lg p-4 w-60 shrink-0"
-              >
-                <img
-  onClick={() => navigate("/product-detail", { state: item })}
-  src={item.image}
-  alt={item.name}
-  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
-/>
-
-                
-                 <button
-  onClick={() =>
-    addToCart({
-      id: item.id, // Ensure `item.id` exists in your `food_list`
-      name: item.name,
-      price: item.price,
-      image: item.image,
-      rating: item.rating
-    })
-  }
-  className="mt-5 cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
->
-  <i class="fa-solid fa-cart-plus"></i>
-  Add
-</button>
-                {/* Favorite Button */}
-                <button
-                 onClick={() =>
-  addToWishlist({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    image: item.image,
-    rating: item.rating
-  })
-}
-
-  className=" cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
->
- <i class="fa-solid fa-heart"></i></button>
-              </div>
-            ))}
-        </div>
-      </div>
-      </div>
-    </section>
-
- <section className="py-12 px-4 bg-orange-50 mt-10">
+  </div>
+</section>
+    
+ <section className="py-12 px-4 mt-0">
       <div className="max-w-7xl mx-auto text-center mb-10">
-        <h2 className="text-3xl font-bold text-orange-600 mb-2">🍛 Today's Special</h2>
+        <h2 className="text-4xl font-bold text-red-600 mb-2">🍛 Today's Special</h2>
         <p className="text-gray-600">Hand-picked dishes curated by our chefs!</p>
         
       </div>
@@ -280,7 +382,7 @@ const brands = [
   }
   className=" cursor-pointer bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
 >
-  <i class="fa-solid fa-cart-plus"></i>
+  <i class="fa-solid fa-cart-plus"></i>{' '}
   Add
   
 </button>
@@ -305,9 +407,71 @@ const brands = [
       </div>
     </section>
 
+     <section className="relative bg-gradient-to-r px-7 mt-10  " >
+      
+      <div className="relative   bg-white bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
+  <section>
+    <h1 className='flex items-center justify-center text-red-600 text-4xl font-bold'>Healthy Food Just For You!</h1>
+  </section>
+      <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
+        <div className="flex animate-scroll gap-8 w-max">
+          {Array(2)
+            .fill(food_list.slice(0, 5))
+            .flat()
+            .map((item, index) => (
+              <div
+                key={index}
+                className="relative bg-white bg-opacity-90 rounded-xl shadow-lg p-4 w-60 shrink-0"
+              >
+                <img
+  onClick={() => navigate("/product-detail", { state: item })}
+  src={item.image}
+  alt={item.name}
+  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+/>
+
+                
+                 <button
+  onClick={() =>
+    addToCart({
+      id: item.id, // Ensure `item.id` exists in your `food_list`
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      rating: item.rating
+    })
+  }
+  className="mt-5 cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
+>
+  <i class="fa-solid fa-cart-plus"></i>{'  '}
+  Add
+</button>
+                {/* Favorite Button */}
+                <button
+                 onClick={() =>
+  addToWishlist({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    image: item.image,
+    rating: item.rating
+  })
+}
+
+  className=" cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
+>
+ <i class="fa-solid fa-heart"></i></button>
+              </div>
+            ))}
+        </div>
+      </div>
+      </div>
+    </section>
+
+
 <section>
- <div className="mt-10 bg-orange-200 py-10 px-4 mb-5">
-      <h2 className="text-3xl font-bold text-center text-orange-600 mb-8">
+ <div className="mt-10  py-10 px-4 mb-5">
+      <h2 className="text-4xl font-bold text-center text-red-600 mb-8">
         ❤️ What Our Customers Say
       </h2>
 
@@ -327,7 +491,7 @@ const brands = [
           </div>
         ))}
 
-         <div className='absolute right-10 bg-white w-30 mt-50'style={{
+         <div className='absolute rounded-full right-10 bg-white w-30 mt-50'style={{
         width: "40px",
         height: "40px",
         borderRadius: "50%",
@@ -343,8 +507,8 @@ const brands = [
 </section>
 
        <section>
-        <div className="overflow-hidden bg-[#f6f3ec] py-6 mb-5">
-          <h1 className="text-3xl font-bold text-center text-black mb-8">Popular Brands & Restaurant</h1>
+        <div className="overflow-hidden  py-6 mb-5">
+          <h1 className="text-4xl font-bold text-center text-red-600 mb-8">Popular Brands & Restaurant</h1>
       <div className="flex animate-scroll whitespace-nowrap">
         {allBrands.map((brand, index) => (
           <img
