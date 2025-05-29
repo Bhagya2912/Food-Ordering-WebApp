@@ -11,6 +11,8 @@ const Menu = () => {
    const { addToCart } = useCart();
    const navigate = useNavigate();
    const [selectedCategory, setSelectedCategory] = useState(null);
+   
+
 
 
   const prev = () => {
@@ -20,6 +22,61 @@ const Menu = () => {
 const next = () => {
   setActive((prev) => (prev === food_list.length - 1 ? 0 : prev + 1));
 };
+
+
+  const restaurants = [
+    {
+      id: 1,
+      name: "The Spice House",
+      image:
+        "https://b.zmtcdn.com/data/pictures/chains/0/18564420/313c34595541181e6132f9476b209e62_featured_v2.jpg",
+      rating: 4.5,
+      menu: [
+        { id: "m1", name: "Chicken Curry", price: 12 },
+        { id: "m2", name: "Paneer Butter Masala", price: 10 },
+        { id: "m3", name: "Garlic Naan", price: 3 },
+      ],
+    },
+    {
+      id: 2,
+      name: "Ocean's Delight",
+      image:
+        "https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg",
+      rating: 4.8,
+      menu: [
+        { id: "m4", name: "Grilled Salmon", price: 18 },
+        { id: "m5", name: "Caesar Salad", price: 9 },
+        { id: "m6", name: "Lemon Tart", price: 7 },
+      ],
+    },
+    {
+      id: 3,
+      name: "Green Garden",
+      image:
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+      rating: 4.3,
+      menu: [
+        { id: "m7", name: "Veggie Burger", price: 8 },
+        { id: "m8", name: "Sweet Potato Fries", price: 5 },
+        { id: "m9", name: "Mango Smoothie", price: 6 },
+      ],
+    },
+    {
+      id: 4,
+      name: "Bella Italia",
+      image:
+        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/b3/78/fa/tamra-restaurant.jpg?w=600&h=-1&s=1",
+      rating: 4.7,
+      menu: [
+        { id: "m10", name: "Margherita Pizza", price: 11 },
+        { id: "m11", name: "Pasta Carbonara", price: 13 },
+        { id: "m12", name: "Tiramisu", price: 7 },
+      ],
+    },
+  ];
+
+  
+
 
 
 
@@ -50,7 +107,10 @@ const scrollRef = useRef(null);
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
   };
-  
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  const selectedRestaurant = restaurants.find((r) => r.id === selectedId);
 
   return (
     <>
@@ -215,7 +275,62 @@ const scrollRef = useRef(null);
       </section>
 
       
-    
+       <section className="max-w-7xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-bold mb-8 text-center">Popular Restaurants Menu</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {restaurants.map((restaurant) => (
+          <div
+            key={restaurant.id}
+            className="cursor-pointer rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow bg-white"
+            onClick={() =>
+              setSelectedId((prev) => (prev === restaurant.id ? null : restaurant.id))
+            }
+          >
+            <img
+              src={restaurant.image}
+              alt={restaurant.name}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-4">
+              <h3 className="font-semibold text-lg">{restaurant.name}</h3>
+              <p className="text-yellow-500">
+                {"⭐".repeat(Math.floor(restaurant.rating))}{" "}
+                <span className="text-gray-600 font-medium">{restaurant.rating.toFixed(1)}</span>
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Selected Restaurant Menu */}
+      {selectedRestaurant && (
+        <div className="mt-12 max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-6 border">
+          <h3 className="text-2xl font-bold mb-4">
+            Menu — {selectedRestaurant.name}
+          </h3>
+          <ul className="divide-y divide-gray-200">
+            {selectedRestaurant.menu.map((item) => (
+              <li
+                key={item.id}
+                className="flex justify-between py-3 text-gray-800 font-medium"
+              >
+                
+                <span>{item.name}</span>
+                <span>${item.price.toFixed(2)}</span>
+              </li>
+            ))}
+          </ul>
+          
+          <button
+            onClick={() => setSelectedId(null)}
+            className="mt-6 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+          >
+            Close Menu
+          </button>
+        </div>
+      )}
+    </section>
 
       <div className="bg-white py-10 text-center">
         <h2 className="text-orange-500 font-semibold text-sm">🍽️ BEST FOOD MENU🍽️</h2>

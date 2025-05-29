@@ -98,23 +98,33 @@ Hungry? Let FoodieMoodie fix that."
           <h3 className="text-xl font-bold mb-4">Quick Links</h3>
           <hr className="border-orange-500 w-10 mb-2" />
           <ul className="space-y-2">
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> About Us</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Our Gallery</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Our Blogs</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> FAQ’S</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Contact Us</li>
+            <li><Link to="/about" className="flex items-center hover:text-orange-500 transition">
+      <i className="fas fa-angles-right mr-2 text-orange-500"></i> About Us
+    </Link></li>
+            <li><Link to="/" className="flex items-center hover:text-orange-500 transition">
+            <i className="fas fa-angles-right mr-2 text-orange-500"></i>  Home</Link></li>
+            <li><Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+<i className="fas fa-angles-right mr-2 text-orange-500"></i> Our Menu</Link></li>
+            <li><Link to="/offer" className="flex items-center hover:text-orange-500 transition">
+            <i className="fas fa-angles-right mr-2 text-orange-500"></i> Our Offers</Link></li>
+            <li><Link to="/contact" className="flex items-center hover:text-orange-500 transition">
+            <i className="fas fa-angles-right mr-2 text-orange-500"></i> Contact Us</Link></li>
           </ul>
         </div>
 
         {/* Our Menu */}
         <div>
-          <h3 className="text-xl font-bold mb-4">Our Menu</h3>
+          <Link to="/menu">
+  <h3 className="text-xl font-bold mb-4 cursor-pointer hover:text-orange-500 transition">
+    Our Menu
+  </h3>
+</Link>
           <hr className="border-orange-500 w-10 mb-2" />
           <ul className="space-y-2">
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Burger King</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Pizza King</li>
+            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Burger</li>
+            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Pizza</li>
             <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Fresh Food</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Vegetable</li>
+            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Breakfast</li>
             <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Desserts</li>
           </ul>
         </div>

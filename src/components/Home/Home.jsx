@@ -52,6 +52,32 @@ const toggleFavorite = (index) => {
     );
   };
 
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    foodItem: "",
+    rating: "5",
+    comments: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you for your feedback!\n" + JSON.stringify(formData, null, 2));
+    // You can replace alert with API call to save feedback
+    setFormData({
+      name: "",
+      email: "",
+      foodItem: "",
+      rating: "5",
+      comments: "",
+    });
+  };
+
 
 const brands = [
   'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-design-template-21c636096aeb4439217e7a2731d16f7d_screen.jpg?ts=1665470337',
@@ -468,6 +494,114 @@ const brands = [
       </div>
     </section>
 
+     <h1 className='flex items-center mt-10 justify-center text-red-600 text-4xl font-bold'>Food Item FeedBack Form</h1>
+    <section className="relative min-h-[600px] flex items-center justify-center px-6 py-16 overflow-hidden font-sans">
+      
+      {/* Split Background */}
+      <div className="absolute inset-0 flex z-0">
+        <div
+          className="flex-1 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80')",
+          }}
+        />
+        <div
+          className="flex-1 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=80')",
+          }}
+        />
+      </div>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60 z-10"></div>
+
+      {/* Form container */}
+      <form
+        onSubmit={handleSubmit}
+        className="relative z-20 max-w-md w-full bg-white bg-opacity-95 rounded-xl p-8 shadow-xl"
+      >
+        <h2 className="text-center text-2xl font-bold mb-8 text-gray-800">
+          Food Item Feedback
+        </h2>
+
+        <label className="block mb-5 text-gray-700">
+          Name
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="Your Name"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </label>
+
+        <label className="block mb-5 text-gray-700">
+          Email
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="you@example.com"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </label>
+
+        <label className="block mb-5 text-gray-700">
+          Food Item
+          <input
+            type="text"
+            name="foodItem"
+            value={formData.foodItem}
+            onChange={handleChange}
+            required
+            placeholder="Name of the food item"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </label>
+
+        <label className="block mb-5 text-gray-700">
+          Rating
+          <select
+            name="rating"
+            value={formData.rating}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="2">5 -Delicious </option>
+            <option value="5">4 - Excellent</option>
+            <option value="4">3 - Very Good</option>
+            <option value="3">2 - Good</option>
+            <option value="1">1 - Poor</option>
+          </select>
+        </label>
+
+        <label className="block mb-8 text-gray-700">
+          Comments
+          <textarea
+            name="comments"
+            value={formData.comments}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Share your thoughts..."
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </label>
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+        >
+          Submit Feedback
+        </button>
+      </form>
+    </section>
 
 <section>
  <div className="mt-10  py-10 px-4 mb-5">

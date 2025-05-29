@@ -417,7 +417,7 @@ export const food_list = [
         image: food_35,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "drink"
+        category: "Drink"
     },
     {
         id: "36",
@@ -425,7 +425,7 @@ export const food_list = [
         image: food_36,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "drink"
+        category: "Drink"
     },
     {
         id: "37",
@@ -433,7 +433,7 @@ export const food_list = [
         image: food_37,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "drink"
+        category: "Drink"
     },{
         id: "38",
         name: "chicken Biryani",
@@ -501,7 +501,7 @@ export const food_list = [
         image: food_46,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "pizza"
+        category: "Pizza"
     },
     {
         id: "47",
@@ -509,7 +509,7 @@ export const food_list = [
         image: food_47,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "pizza"
+        category: "Pizza"
     },
     {
         id: "48",
@@ -517,15 +517,15 @@ export const food_list = [
         image: food_48,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "pizza"
+        category: "Pizza"
     },
     {
         id: "49",
         name: "MoJo Pizza",
-        image: food_45,
+        image: food_49,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "pizza"
+        category: "Pizza"
     }
 
 
