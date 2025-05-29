@@ -4,7 +4,7 @@ import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { menu_list } from "../../assets/assets";
 import { ChevronLeft, ChevronRight } from "lucide-react"; // or use HeroIcons or FontAwesome
-
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [active, setActive] = useState(0);
@@ -54,11 +54,123 @@ const scrollRef = useRef(null);
 
   return (
     <>
+    <section className="py-8 bg-white  relative px-12">
+      <h2 className="text-4xl font-bold text-center text-black mb-6">
+        Our Food Menu
+      </h2>
+
+      <div className="relative  px-10">
+        {/* Left Scroll Button */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
+        >
+          <ChevronLeft className="w-6 h-6 text-orange-600" />
+        </button>
+
+        {/* Scrollable Menu */}
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto space-x-7 scrollbar-hide scroll-smooth"
+        >
+          {menu_list.map((item, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 text-center cursor-pointer"
+              onClick={() => setSelectedCategory(item.menu_name)}
+            >
+              <img
+                src={item.menu_image}
+                alt={item.menu_name}
+                className="w-24 h-24 mx-auto object-cover rounded-full border-4 border-orange-200 hover:scale-110 transition-transform duration-300"
+              />
+              <h3 className="text-sm font-medium text-gray-700 mt-2">
+                {item.menu_name}
+              </h3>
+            </div>
+            
+          ))}
+          
+        </div>
+
+        {/* Right Scroll Button */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
+        >
+          <ChevronRight className="w-6 h-6 text-orange-600" />
+        </button>
+      </div>
+
+      {/* Sub-Items for Selected Category */}
+      {selectedCategory && (
+        <div className="mt-10">
+          <h3 className="text-2xl font-semibold text-center text-orange-600 mb-6">
+            {selectedCategory} Items
+          </h3>
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {food_list
+    .filter((food) => food.category === selectedCategory)
+    .map((food, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center"
+      >
+        <img
+          onClick={() => navigate("/product-detail", { state: food })}
+          src={food.image}
+          alt={food.name}
+          className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+        />
+        <h4 className="text-lg font-semibold mt-2">{food.name}</h4>
+        <p className="text-sm text-gray-500">{food.category}</p>
+        <div className="flex gap-4 mt-3">
+                    
+  <button
+    onClick={() =>
+      addToCart({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        rating: item.rating,
+      })
+    }
+    className="flex items-center gap-2 bg-emerald-600 text-white py-1 px-5 rounded hover:bg-emerald-700 transition duration-300"
+  >
+    <i className="fa-solid fa-cart-plus"></i> Add
+  </button>
+
+  <button
+    onClick={() =>
+      addToWishlist({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        rating: item.rating,
+      })
+    }
+    className="flex items-center gap-2 bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300"
+  >
+    <i className="fa-solid fa-heart"></i>
+  </button>
+</div>
+
+
+                </div>
+              ))}
+              
+          </div>
+          
+        </div>
+      )}
+    </section>
       <section>
         <div className="relative w-full h-[570px] flex flex-col items-center justify-center overflow-hidden bg-cover bg-center text-white-500"
           style={{ backgroundImage: "url('https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}
         >
-          <h2 className="text-4xl font-bold text-white mb-8 italic underline">Menu</h2>
+          <h2 className="text-4xl font-bold text-white mb-8 italic underline">Best Seller Food Items</h2>
 
           <div className="relative w-full max-w-6xl flex items-center justify-center h-[400px]">
             <button onClick={prev} className="absolute left-0 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100">
@@ -66,7 +178,7 @@ const scrollRef = useRef(null);
             </button>
 
             <div className="relative flex justify-center items-center w-full h-full">
-              {food_list.slice(1, 10).map((item, index) => {
+              {food_list.map((item, index) => {
                 const offset = index - active;
                 const isActive = index === active;
 
@@ -102,80 +214,8 @@ const scrollRef = useRef(null);
         </div>
       </section>
 
-      (
-    <section className="py-8 bg-white  relative px-12">
-      <h2 className="text-4xl font-bold text-center text-black mb-6">
-        Our Food Menu
-      </h2>
-
-      <div className="relative px-10">
-        {/* Left Scroll Button */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
-        >
-          <ChevronLeft className="w-6 h-6 text-orange-600" />
-        </button>
-
-        {/* Scrollable Menu */}
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto space-x-7 scrollbar-hide scroll-smooth"
-        >
-          {menu_list.map((item, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 text-center cursor-pointer"
-              onClick={() => setSelectedCategory(item.menu_name)}
-            >
-              <img
-                src={item.menu_image}
-                alt={item.menu_name}
-                className="w-24 h-24 mx-auto object-cover rounded-full border-4 border-orange-200 hover:scale-110 transition-transform duration-300"
-              />
-              <h3 className="text-sm font-medium text-gray-700 mt-2">
-                {item.menu_name}
-              </h3>
-            </div>
-          ))}
-        </div>
-
-        {/* Right Scroll Button */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
-        >
-          <ChevronRight className="w-6 h-6 text-orange-600" />
-        </button>
-      </div>
-
-      {/* Sub-Items for Selected Category */}
-      {selectedCategory && (
-        <div className="mt-10">
-          <h3 className="text-2xl font-semibold text-center text-orange-600 mb-6">
-            {selectedCategory} Items
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {food_list
-              .filter((food) => food.category === selectedCategory)
-              .map((food, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center"
-                >
-                  <img
-                    src={food.image}
-                    alt={food.name}
-                    className="w-full h-40 object-cover rounded-md"
-                  />
-                  <h4 className="text-lg font-semibold mt-2">{food.name}</h4>
-                  <p className="text-sm text-gray-500">{food.category}</p>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
-    </section>
+      
+    
 
       <div className="bg-white py-10 text-center">
         <h2 className="text-orange-500 font-semibold text-sm">🍽️ BEST FOOD MENU🍽️</h2>
@@ -183,7 +223,7 @@ const scrollRef = useRef(null);
 
         <div className="flex flex-wrap justify-center gap-6 px-4">
   {visibleItems.map((item, index) => (
-    <div key={index} className="bg-white shadow-md rounded-xl w-64 p-5">
+    <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-3 w-64 p-5">
       
        {/* Container for image and rotating border */}
         <div className="relative w-36 h-36 mx-auto mb-4 flex items-center justify-center">
@@ -215,12 +255,27 @@ const scrollRef = useRef(null);
   }
   className="bg-emerald-600 text-white py-1 px-4 rounded hover:bg-red-700 transition duration-300"
 >
-  Add to Cart
+   <i class="fa-solid fa-cart-plus"></i>{' '}
+  Add
+  
 </button>
+<button
+  onClick={() =>
+  addToWishlist({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    image: item.image,
+    rating: item.rating
+  })
+}
+
+  className="ml-5 cursor-pointer bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50  transition duration-300"
+>
+ <i class="fa-solid fa-heart"></i></button>
 
             </div>
           ))}
-          
           
           
         </div>

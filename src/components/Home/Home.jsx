@@ -127,13 +127,13 @@ const brands = [
    <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
   <Link
     to="/menu"
-    className="bg-orange-600 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-300 text-center sm:w-auto"
+    className="bg-orange-700 text-white px-6 py-2 rounded shadow-md transition duration-300 text-center sm:w-auto"
   >
     Order Now
   </Link>
   <Link
     to="/menu"
-    className="bg-orange-600 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-300 text-center  sm:w-auto"
+    className="bg-orange-700 text-white px-6 py-2 rounded  shadow-md transition duration-300 text-center  sm:w-auto"
   >
     Explore More <i className="fa-solid fa-arrow-right ml-2"></i>
   </Link>
