@@ -437,7 +437,7 @@ const brands = [
       
       <div className="relative   bg-white bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
   <section>
-    <h1 className='flex items-center justify-center text-red-600 text-4xl font-bold'>Healthy Food Just For You!</h1>
+    <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mt-6 sm:mt-8 md:mt-10 text-center px-4'>Healthy Food Just For You!</h1>
   </section>
       <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
         <div className="flex animate-scroll gap-8 w-max">
@@ -494,7 +494,10 @@ const brands = [
       </div>
     </section>
 
-     <h1 className='flex items-center mt-10 justify-center text-red-600 text-4xl font-bold'>Food Item FeedBack Form</h1>
+    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mt-6 sm:mt-8 md:mt-10 text-center px-4">
+  Food Item Feedback Form
+</h1>
+
     <section className="relative min-h-[600px] flex items-center justify-center px-6 py-16 overflow-hidden font-sans">
       
       {/* Split Background */}
