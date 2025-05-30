@@ -6,11 +6,13 @@ import { menu_list } from "../../assets/assets";
 import { ChevronLeft, ChevronRight } from "lucide-react"; // or use HeroIcons or FontAwesome
 import { Link } from "react-router-dom";
 
+
 const Menu = () => {
   const [active, setActive] = useState(0);
    const { addToCart } = useCart();
    const navigate = useNavigate();
    const [selectedCategory, setSelectedCategory] = useState(null);
+  const { wishlistItems,addToWishlist } = useCart();
    
 
 
@@ -90,8 +92,8 @@ const next = () => {
 
  
 
-  // Get 3 items in a looped manner
-  const visibleItems = [
+  // Get 3 foods in a looped manner
+  const visiblefoods = [
   food_list[startIndex % food_list.length],
   food_list[(startIndex + 1) % food_list.length],
   food_list[(startIndex + 2) % food_list.length],
@@ -133,19 +135,19 @@ const scrollRef = useRef(null);
           ref={scrollRef}
           className="flex overflow-x-auto space-x-7 scrollbar-hide scroll-smooth"
         >
-          {menu_list.map((item, index) => (
+          {menu_list.map((food, index) => (
             <div
               key={index}
               className="flex-shrink-0 text-center cursor-pointer"
-              onClick={() => setSelectedCategory(item.menu_name)}
+              onClick={() => setSelectedCategory(food.menu_name)}
             >
               <img
-                src={item.menu_image}
-                alt={item.menu_name}
+                src={food.menu_image}
+                alt={food.menu_name}
                 className="w-24 h-24 mx-auto object-cover rounded-full border-4 border-orange-200 hover:scale-110 transition-transform duration-300"
               />
               <h3 className="text-sm font-medium text-gray-700 mt-2">
-                {item.menu_name}
+                {food.menu_name}
               </h3>
             </div>
             
@@ -162,11 +164,11 @@ const scrollRef = useRef(null);
         </button>
       </div>
 
-      {/* Sub-Items for Selected Category */}
+      {/* Sub-foods for Selected Category */}
       {selectedCategory && (
         <div className="mt-10">
           <h3 className="text-2xl font-semibold text-center text-orange-600 mb-6">
-            {selectedCategory} Items
+            {selectedCategory} foods
           </h3>
          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   {food_list
@@ -174,7 +176,7 @@ const scrollRef = useRef(null);
     .map((food, index) => (
       <div
         key={index}
-        className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center"
+        className="bg-white rounded-xl shadow-md p-4 flex flex-col foods-center"
       >
         <img
           onClick={() => navigate("/product-detail", { state: food })}
@@ -189,14 +191,14 @@ const scrollRef = useRef(null);
   <button
     onClick={() =>
       addToCart({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        rating: item.rating,
+        id: food.id,
+        name: food.name,
+        price: food.price,
+        image: food.image,
+        rating: food.rating,
       })
     }
-    className="flex items-center gap-2 bg-emerald-600 text-white py-1 px-5 rounded hover:bg-emerald-700 transition duration-300"
+    className="cursor-pointer  gap-2 bg-emerald-600 text-white py-1 px-5 rounded hover:bg-emerald-700 transition duration-300"
   >
     <i className="fa-solid fa-cart-plus"></i> Add
   </button>
@@ -204,14 +206,14 @@ const scrollRef = useRef(null);
   <button
     onClick={() =>
       addToWishlist({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        rating: item.rating,
+        id: food.id,
+        name: food.name,
+        price: food.price,
+        image: food.image,
+        rating: food.rating,
       })
     }
-    className="flex items-center gap-2 bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300"
+    className="cursor-pointer gap-2 bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300"
   >
     <i className="fa-solid fa-heart"></i>
   </button>
@@ -227,18 +229,18 @@ const scrollRef = useRef(null);
       )}
     </section>
       <section>
-        <div className="relative w-full h-[570px] flex flex-col items-center justify-center overflow-hidden bg-cover bg-center text-white-500"
+        <div className="relative w-full h-[570px] flex flex-col foods-center justify-center overflow-hidden bg-cover bg-center text-white-500"
           style={{ backgroundImage: "url('https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}
         >
-          <h2 className="text-4xl font-bold text-white mb-8 italic underline">Best Seller Food Items</h2>
+          <h2 className="text-4xl font-bold flex justify-center text-white mb-15 italic underline">Best Seller Food foods</h2>
 
-          <div className="relative w-full max-w-6xl flex items-center justify-center h-[400px]">
+          <div className="relative w-full max-w-6xl flex foods-center justify-center h-[400px]">
             <button onClick={prev} className="absolute left-0 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100">
               ‹
             </button>
 
-            <div className="relative flex justify-center items-center w-full h-full">
-              {food_list.map((item, index) => {
+            <div className="relative flex justify-center foods-center w-full h-full">
+              {food_list.map((food, index) => {
                 const offset = index - active;
                 const isActive = index === active;
 
@@ -256,7 +258,7 @@ const scrollRef = useRef(null);
                     }}
                     onClick={() => setActive(index)}
                   >
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={food.image} alt={food.name} className="w-full h-full object-cover" />
                   </div>
                 );
               })}
@@ -310,14 +312,14 @@ const scrollRef = useRef(null);
             Menu — {selectedRestaurant.name}
           </h3>
           <ul className="divide-y divide-gray-200">
-            {selectedRestaurant.menu.map((item) => (
+            {selectedRestaurant.menu.map((food) => (
               <li
-                key={item.id}
+                key={food.id}
                 className="flex justify-between py-3 text-gray-800 font-medium"
               >
                 
-                <span>{item.name}</span>
-                <span>${item.price.toFixed(2)}</span>
+                <span>{food.name}</span>
+                <span>${food.price.toFixed(2)}</span>
               </li>
             ))}
           </ul>
@@ -334,20 +336,20 @@ const scrollRef = useRef(null);
 
       <div className="bg-white py-10 text-center">
         <h2 className="text-orange-500 font-semibold text-sm">🍽️ BEST FOOD MENU🍽️</h2>
-        <h1 className="text-4xl font-bold text-gray-800 mb-8">Popular Food Items </h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-8">Popular Food foods </h1>
 
         <div className="flex flex-wrap justify-center gap-6 px-4">
-  {visibleItems.map((item, index) => (
+  {visiblefoods.map((food, index) => (
     <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-3 w-64 p-5">
       
        {/* Container for image and rotating border */}
-        <div className="relative w-36 h-36 mx-auto mb-4 flex items-center justify-center">
+        <div className="relative w-36 h-36 mx-auto mb-4 flex foods-center justify-center">
           
           {/* Static Image (centered absolutely) */}
           <div className="absolute w-32 h-32 rounded-full overflow-hidden z-10"><img
-  onClick={() => navigate("/product-detail", { state: item })}
-  src={item.image}
-  alt={item.name}
+  onClick={() => navigate("/product-detail", { state: food })}
+  src={food.image}
+  alt={food.name}
   className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
 />
  </div>
@@ -355,17 +357,17 @@ const scrollRef = useRef(null);
           {/* Rotating Dashed Border (in background) */}
           <div className="w-full h-full rounded-full border-2 border-dashed border-red-400 animate-rotate" />
       </div>
-               <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
-      <p className="text-gray-500">{item.description}</p>
-      <p className="text-red-600 font-semibold text-lg mt-1">₹{item.price}</p>
+               <h3 className="text-lg font-bold text-gray-800">{food.name}</h3>
+      <p className="text-gray-500">{food.description}</p>
+      <p className="text-red-600 font-semibold text-lg mt-1">₹{food.price}</p>
      <button
   onClick={() =>
     addToCart({
-      id: item.id, // Ensure `item.id` exists in your `food_list`
-      name: item.name,
-      price: item.price,
-      image: item.image,
-      rating: item.rating
+      id: food.id, // Ensure `food.id` exists in your `food_list`
+      name: food.name,
+      price: food.price,
+      image: food.image,
+      rating: food.rating
     })
   }
   className="bg-emerald-600 text-white py-1 px-4 rounded hover:bg-red-700 transition duration-300"
@@ -377,11 +379,11 @@ const scrollRef = useRef(null);
 <button
   onClick={() =>
   addToWishlist({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    image: item.image,
-    rating: item.rating
+    id: food.id,
+    name: food.name,
+    price: food.price,
+    image: food.image,
+    rating: food.rating
   })
 }
 

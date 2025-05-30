@@ -433,12 +433,12 @@ const brands = [
       </div>
     </section>
 
-     <section className="relative bg-gradient-to-r px-7 mt-10  " >
+     <section className="relative bg-gradient-to-r px-7 mt-0  " >
       
       <div className="relative   bg-white bg-center px-2 py-9 overflow-hidden h-[400px] rounded-lg shadow-md" >
-  <section>
-    <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mt-6 sm:mt-8 md:mt-10 text-center px-4'>Healthy Food Just For You!</h1>
-  </section>
+  
+    <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mt-5 sm:mt-8 md:mt-5 text-center px-4'>Healthy Food Just For You!</h1>
+  
       <div className="absolute top-24 left-0 w-full h-full overflow-hidden">
         <div className="flex animate-scroll gap-8 w-max">
           {Array(2)
