@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useCart } from '../../context/CartContext'; // <--- ADDED/MODIFIED: Import useCart
 
+
 const Checkout = () => {
   // <--- MODIFIED: Destructure cartItems, placeOrder, and clearCart from the CartContext
   const { cartItems, placeOrder, clearCart } = useCart();

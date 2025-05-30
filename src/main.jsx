@@ -17,7 +17,7 @@ import Productdetails from './components/Productdetails/Productdetails.jsx'
 import CheckOut from './components/CheckOut/CheckOut.jsx'
 import OrderHistory from './components/OrderHistory/OrderHistory.jsx'
 import Offer from './components/Offer/Offer.jsx'
-
+import AuthProvider from './context/AuthContext.jsx'
 
 
 
@@ -49,6 +49,7 @@ const router =createBrowserRouter(
     <Route path='/' element={<Layout/>}>
       
       <Route index element={<Home />} />
+       <Route path='home' element={<Home />} /> {/* ✅ ADD THIS */}
       <Route path='about' element={<About/>}></Route>
       <Route path='contact' element={<Contact/>}></Route>
       
@@ -75,9 +76,12 @@ const router =createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CartProvider>
+    <AuthProvider>
+      <CartProvider>
       <RouterProvider router={router}/>
     </CartProvider>
+    </AuthProvider>
+    
      
  
    

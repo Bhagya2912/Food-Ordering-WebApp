@@ -99,12 +99,20 @@ const Productdetails = () => {
             </div>
 
             <button
-              className="mt-6 w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded font-bold"
+              className="cursor-pointer mt-5 mr-6 bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
               onClick={() =>
                 addToCart({ ...product, quantity })
               }
             >
-              + Add To Cart
+             <i className="fa-solid fa-cart-plus"></i>  Add To Cart
+            </button>
+            <button
+              className="cursor-pointer bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50  transition duration-300"
+              onClick={() =>
+                addToWishlist({ ...product, quantity })
+              }
+            >
+             <i className="fa-solid fa-heart "></i>
             </button>
           </div>
           

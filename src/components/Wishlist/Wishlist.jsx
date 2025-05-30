@@ -2,10 +2,15 @@ import React from 'react';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
 
 function Wishlist() {
   const { wishlistItems, removeFromWishlist, addToCart } = useCart();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
 
   return (
     <>

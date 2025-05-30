@@ -138,6 +138,7 @@ export const CartProvider = ({ children }) => {
     clearCart();
   };
 
+ 
   return (
     <CartContext.Provider
       value={{
@@ -151,6 +152,7 @@ export const CartProvider = ({ children }) => {
         removeFromWishlist,
         orderHistory,
         placeOrder,
+      
       }}
     >
       {children}

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, NavLink,useNavigate } from "react-router-dom";
 import { Heart, Menu } from "lucide-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useCart } from "../../context/CartContext";
 import { faTags } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png'; // ✅ Correct path
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,12 +15,24 @@ const Header = () => {
   const { cartItems, wishlistItems } = useCart();
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0) || 0;
   const wishlistCount = wishlistItems.length || 0;
-
-  const toggleSidebar = (e) => {
-    e.preventDefault();
-    console.log("Sidebar toggled:", !isSidebarOpen); // Debug log
-    setIsSidebarOpen(!isSidebarOpen);
+  const { user,logout } = useContext(AuthContext);
+ const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+ 
+  const handleLogout = () => {
+    logout();  // Use context logout
+  navigate("/home");
   };
+
+
+ const toggleSidebar = (e) => {
+  if (e && e.preventDefault) {
+    e.preventDefault();
+  }
+  console.log("Sidebar toggled:", !isSidebarOpen); // Debug log
+  setIsSidebarOpen(!isSidebarOpen);
+};
+
 
   // Close sidebar on Escape key
   useEffect(() => {
@@ -86,16 +99,35 @@ const Header = () => {
                 </span>
               </div>
             </Link>
-            <Link
-              to="/login"
-              className="text-white ml-8 bg-orange-600 text-sm px-4 py-2 rounded font-semibold  focus:outline-none"
-              aria-label="Log in"
-               /* w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 rounded text-sm font-semibold */
-            >
-             
-              Login {' '}
-              <i class="fa-solid fa-user"></i>
-            </Link>
+             {user ? (
+        <div className="relative inline-block text-left">
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="cursor-pointer text-white ml-8 bg-orange-600 text-sm px-4 py-2 rounded font-semibold focus:outline-none"
+          >
+            Welcome,  {user.fullName} <i className="fa-solid fa-user ml-1"></i>
+          </button>
+
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-47 bg-white border rounded shadow-lg z-50">
+              <button
+                onClick={handleLogout}
+                className="cursor-pointer block w-full px-4 py-2 text-left text-black hover:text-red-800"
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link
+          to="/login"
+          className="cursor-pointer text-white ml-8 bg-orange-600 text-sm px-4 py-2 rounded font-semibold focus:outline-none"
+        >
+          Login <i className="fa-solid fa-user ml-1"></i>
+        </Link>
+      )}
+   
           </div>
 
           {/* Mobile + Desktop Menu */}
@@ -221,17 +253,24 @@ const Header = () => {
                       Support
                     </Link>
                   </li>
-                 <li>
-                <Link
-                  to="/order-history"
-                  className={({ isActive }) =>
-                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
-                  }
-                  aria-label="order-history"
-                >
-                 Order History
-                </Link>
-              </li>
+                <li>
+  <button
+    onClick={() => {
+      if (isSidebarOpen) toggleSidebar(); // Close the sidebar if it's open
+      if (user) {
+        navigate("/order-history");
+      } else {
+        navigate("/login");
+      }
+    }}
+    className="cursor-pointer block text-white hover:text-orange-700 w-full text-left"
+    aria-label="Order History"
+  >
+    Order History
+  </button>
+</li>
+
+
                   <li>
                     <Link
                       to="/Offer"
@@ -245,17 +284,25 @@ const Header = () => {
                     </Link>
                   </li>
                    <li>
-                <Link
-  to="/"
-  className={({ isActive }) =>
-    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
-  }
-  onClick={toggleSidebar} // no event passed, no preventDefault
-  aria-label="Logout"
->
-  Logout <i className="fa-solid fa-arrow-right-from-bracket" style={{color:"orange"}}></i>
-</Link>
-
+              {user ? (
+        <div className="flex items-center gap-3">
+          <button className="cursor-pointer text-red-600 rounded flex items-center gap-2">
+            <i className="fa-solid fa-user"></i> {user.fullName}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="cursor-pointer text-sm white "
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <Link to="/login">
+          <button className="cursor-pointer text-white  rounded flex items-center gap-2">
+            <i className="fa-solid fa-user"></i> Login
+          </button>
+        </Link>
+      )}
               </li>
                   <button
                   onClick={toggleSidebar}

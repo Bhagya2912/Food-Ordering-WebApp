@@ -15,7 +15,8 @@ function Home({ name, image, price, rating }) {
     const { addToCart } = useCart();
     const { wishlistItems,addToWishlist } = useCart();
 
-    
+    const [user, setUser] = useState(null);
+
 
 
     new Intl.NumberFormat('en-IN', {
@@ -660,6 +661,7 @@ const brands = [
  
        </section>
 
+  
 
      
     </div>

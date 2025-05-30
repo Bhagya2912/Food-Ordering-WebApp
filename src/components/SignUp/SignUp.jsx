@@ -1,10 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+   const newUser = { name: fullName, email, phone, password };
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+    const userExists = existingUsers.find((user) => user.email === email);
+    if (userExists) {
+      alert('User with this email already exists.');
+      return;
+    }
+
+    existingUsers.push(newUser);
+    localStorage.setItem('users', JSON.stringify(existingUsers));
+    alert('Signup successful! Please log in.');
+    navigate('/login');
+  };
+
   return (
-             
-              
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{
@@ -17,50 +45,19 @@ const SignUp = () => {
           🍔 Create Your Account
         </h2>
 
-        <form className="space-y-4">
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
-            required
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition"
-          >
-            Sign Up
-          </button>
+        <form className="space-y-4" onSubmit={handleSignup}>
+          <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full Name" required className="w-full px-4 py-2 border rounded-md" />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required className="w-full px-4 py-2 border rounded-md" />
+          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" required className="w-full px-4 py-2 border rounded-md" />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required className="w-full px-4 py-2 border rounded-md" />
+          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" required className="w-full px-4 py-2 border rounded-md" />
+          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition">Sign Up</button>
         </form>
-
-        
       </div>
     </div>
-       );
+  );
 };
 
 export default SignUp;
+
 
