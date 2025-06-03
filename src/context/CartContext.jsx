@@ -31,6 +31,8 @@ export const CartProvider = ({ children }) => {
     }
   });
 
+  
+
   // Order history state
   const [orderHistory, setOrderHistory] = useState(() => {
     try {

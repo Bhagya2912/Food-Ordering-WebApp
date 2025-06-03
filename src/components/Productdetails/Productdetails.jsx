@@ -81,6 +81,7 @@ const Productdetails = () => {
 
           <div className="mt-6">
             <span className="text-xl font-semibold text-orange-600">₹{product.price}</span>
+            
 
             <div className="mt-4 flex items-center gap-4">
               <button

@@ -18,6 +18,7 @@ import CheckOut from './components/CheckOut/CheckOut.jsx'
 import OrderHistory from './components/OrderHistory/OrderHistory.jsx'
 import Offer from './components/Offer/Offer.jsx'
 import AuthProvider from './context/AuthContext.jsx'
+import Profile from './components/Profile/Profile.jsx'
 
 
 
@@ -63,7 +64,8 @@ const router =createBrowserRouter(
         <Route path='login' element={<Login/>}></Route>
         <Route path="/Cart" element={<Cart />} />
        <Route path="/wishlist" element={<Wishlist />} />
-       <Route path="/order-history" element={<OrderHistory />} />
+       <Route path="/Profile" element={<Profile />} />
+      <Route path="/order-history" element={<OrderHistory />} />
        <Route path='product-detail' element={<Productdetails />} />
        <Route path='Offer' element={<Offer />} />
       <Route path='checkout' element={<CheckOut/>} />

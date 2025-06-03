@@ -11,11 +11,14 @@ function Home({ name, image, price, rating }) {
 
     const [favorites, setFavorites] = useState([]);
       const [current, setCurrent] = useState(0);
-    const navigate=useNavigate();
+   
     const { addToCart } = useCart();
     const { wishlistItems,addToWishlist } = useCart();
 
     const [user, setUser] = useState(null);
+
+    const navigate = useNavigate();
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // Or get from context
 
 
 
@@ -413,20 +416,24 @@ const brands = [
   Add
   
 </button>
-                <button
-                 onClick={() =>
-  addToWishlist({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    image: item.image,
-    rating: item.rating
-  })
-}
-
-  className=" cursor-pointer bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50  transition duration-300"
+                 <button
+  onClick={() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      addToWishlist({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        rating: item.rating,
+      });
+    }
+  }}
+  className="cursor-pointer  bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
 >
- <i class="fa-solid fa-heart"></i></button>
+  <i className="fa-solid fa-heart"></i>
+</button>
               </div>
             </div>
           </div>
@@ -473,21 +480,25 @@ const brands = [
   <i class="fa-solid fa-cart-plus"></i>{'  '}
   Add
 </button>
-                {/* Favorite Button */}
-                <button
-                 onClick={() =>
-  addToWishlist({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    image: item.image,
-    rating: item.rating
-  })
-}
-
-  className=" cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
+              <button
+  onClick={() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      addToWishlist({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        rating: item.rating,
+      });
+    }
+  }}
+  className="cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
 >
- <i class="fa-solid fa-heart"></i></button>
+  <i className="fa-solid fa-heart"></i>
+</button>
+
               </div>
             ))}
         </div>

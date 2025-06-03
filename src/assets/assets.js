@@ -519,14 +519,20 @@ export const food_list = [
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pizza"
     },
-    {
-        id: "49",
-        name: "MoJo Pizza",
-        image: food_49,
-        price: 15,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pizza"
-    }
+   {
+  id: "49",
+  name: "MoJo Pizza",
+  image: food_49,
+  price: 15, // base price (optional)
+  description: "Food provides essential nutrients for overall health and well-being",
+  category: "Pizza",
+  sizes: [
+    { label: "Small", price: 10 },
+    { label: "Medium", price: 15 },
+    { label: "Large", price: 20 }
+  ]
+}
+
 
 
 ]

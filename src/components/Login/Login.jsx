@@ -5,30 +5,40 @@ import { AuthContext } from "../../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 toggle visibility
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useContext(AuthContext);
 
-  // The path to redirect after login (default to /home)
+  const [message, setMessage] = useState(null);
+const [messageType, setMessageType] = useState(""); // 'success' or 'error'
+
+
   const from = location.state?.from || "/home";
 
   const handleLogin = (e) => {
-    e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
-    if (user) {
-      login(user); // use context login
-      alert("Login successful!");
-      navigate(from, { replace: true }); // redirect to 'from' path
-    } else {
-      alert("Invalid email or password.");
-    }
-  };
+  e.preventDefault();
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const user = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+  );
+
+  if (user) {
+    login(user);
+    setMessage("Login successful!");
+    setMessageType("success");
+    setTimeout(() => {
+      navigate(from, { replace: true });
+    }, 1000); // Wait briefly to show success message
+  } else {
+    setMessage("Invalid email or password.");
+    setMessageType("error");
+  }
+};
+
 
   return (
-    <div className="min-h-screen mt-5 mb-5 bg-gray-100 flex items-center justify-center px-4">
+    <div className="min-h-screen mb-5 bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl overflow-hidden">
         <div className="md:w-1/2 h-64 md:h-auto">
           <img
@@ -45,29 +55,71 @@ const Login = () => {
           <p className="text-orange-600 font-semibold mt-3 mb-6">LOGIN</p>
 
           <form className="space-y-5" onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Email ID"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-5 py-3 rounded-full border border-gray-300"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-5 py-3 rounded-full border border-gray-300"
-              required
-            />
+            <div className="relative">
+  <input
+    type="email"
+    placeholder="Email ID"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="w-full px-12 py-3 rounded-full border border-gray-300"
+    required
+  />
+  <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
+    <i className="fa-solid fa-user"></i>
+  </span>
+</div>
+
+            <div className="relative">
+              
+              <div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="w-full px-12 py-3 rounded-full border border-gray-300 pr-12"
+    required
+  />
+  {/* Lock icon */}
+  <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
+    <i className="fa-solid fa-lock"></i>
+  </span>
+  {/* Eye toggle icon */}
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 text-lg cursor-pointer"
+  >
+    <i className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+  </span>
+</div>
+
+            </div>
+
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white font-semibold py-3 rounded hover:bg-orange-600 transition"
+              className="w-full bg-orange-600 text-white font-semibold py-3 rounded hover:bg-orange-600 transition"
             >
               Login
             </button>
           </form>
+       {message && (
+  <div className="fixed bottom-5 right-5 z-50">
+    <div
+      className={`px-6 py-3 rounded-md shadow-md text-black font-medium transition-all duration-300 ${
+        messageType === "success"
+          ? "bg-white"
+          : "bg-green-500"
+      }`}
+    >
+      {message}
+    </div>
+  </div>
+)}
+
+
+    
+
+
 
           <p className="text-center text-sm text-gray-400 mt-3">Forgot password?</p>
 
@@ -99,4 +151,5 @@ const Login = () => {
 };
 
 export default Login;
+
 

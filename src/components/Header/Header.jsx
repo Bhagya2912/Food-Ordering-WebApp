@@ -18,6 +18,8 @@ const Header = () => {
   const { user,logout } = useContext(AuthContext);
  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
  
   const handleLogout = () => {
     logout();  // Use context logout
@@ -88,17 +90,20 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/wishlist"
-              className="ml-5 flex items-center text-black hover:text-orange-500 relative"
-              aria-label={`Wishlist with ${wishlistCount} items`}
-            >
-              <div className="relative">
-                <Heart size={30} />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
-                  {wishlistCount}
-                </span>
-              </div>
-            </Link>
+  to="/wishlist"
+  className="ml-5 flex items-center text-black hover:text-orange-500 relative"
+  aria-label={`Wishlist with ${wishlistCount} items`}
+>
+  <div className="relative">
+    <Heart size={30} />
+    {isLoggedIn && wishlistCount > 0 && (
+      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
+        {wishlistCount}
+      </span>
+    )}
+  </div>
+</Link>
+
              {user ? (
         <div className="relative inline-block text-left">
           <button
@@ -110,12 +115,43 @@ const Header = () => {
 
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-47 bg-white border rounded shadow-lg z-50">
+               <button>
+                    <Link
+                      to="/Profile"
+                     className={({ isActive }) =>
+                    `block py-2 px-3 ${isActive ? "text-orange-500" : "text-white"} hover:text-orange-700`
+                    }
+                      aria-label="Place a new order"
+                    >
+                 <div className="flex items-center px-4 py-2 gap-2 cursor-pointer hover:text-red-800 text-black">
+  <i className="fa-solid fa-user"></i>
+  <span className="block text-left">Profile</span>
+</div>
+                    </Link>  
+              </button>         
+  <button
+    onClick={() => {
+      if (isSidebarOpen) toggleSidebar(); // Close the sidebar if it's open
+      if (user) {
+        navigate("/order-history");
+      } else {
+        navigate("/login");
+      }
+    }}
+    className="cursor-pointer block w-full px-4 py-2 text-left text-black hover:text-red-800"
+    aria-label="Order History"
+  >
+    Your Order
+  </button>
+
+
               <button
                 onClick={handleLogout}
                 className="cursor-pointer block w-full px-4 py-2 text-left text-black hover:text-red-800"
               >
                 Logout
               </button>
+              
             </div>
           )}
         </div>
@@ -222,16 +258,7 @@ const Header = () => {
               >
                 
                 <ul className="flex flex-col gap-4">
-                  <li>
-                    <Link
-                      to="/profile"
-                      className="text-white hover:text-orange-500"
-                      onClick={toggleSidebar}
-                      aria-label="View profile"
-                    >
-                      Profile
-                    </Link>
-                  </li>
+                 
                   <li>
                     <Link
                       to="/settings"
@@ -253,23 +280,7 @@ const Header = () => {
                       Support
                     </Link>
                   </li>
-                <li>
-  <button
-    onClick={() => {
-      if (isSidebarOpen) toggleSidebar(); // Close the sidebar if it's open
-      if (user) {
-        navigate("/order-history");
-      } else {
-        navigate("/login");
-      }
-    }}
-    className="cursor-pointer block text-white hover:text-orange-700 w-full text-left"
-    aria-label="Order History"
-  >
-    Order History
-  </button>
-</li>
-
+               
 
                   <li>
                     <Link
