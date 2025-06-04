@@ -401,7 +401,7 @@ const brands = [
 </section>
     
  <section className="relative py-12 px-4 mt-0">
- <div className="absolute top-10 right-10 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20">
+ <div className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20">
   <div className="bg-orange-600 text-white text-xs sm:text-sm md:text-base font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center gap-2 animate-pulse">
     ⏰ Offer ends in {formatTime(timeLeft)}
   </div>
