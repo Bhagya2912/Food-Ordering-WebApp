@@ -172,87 +172,97 @@ export const food_list = [
         id: "1",
         name: "Greek salad",
         image: food_1,
-        price: 12,
+        price: 120,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
+        category: "Salad",
     },
     {
         id: "2",
         name: "Veg salad",
         image: food_2,
-        price: 18,
+        price: 180,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
+        category: "Salad",
+        offer:"20% off upto 100"
     }, {
         id: "3",
         name: "Clover Salad",
         image: food_3,
-        price: 16,
+        price: 160,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
+        category: "Salad",
+        offer:"20% off upto 200"
     }, {
         id: "4",
         name: "Chicken Salad",
         image: food_4,
-        price: 24,
+        price: 240,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
+        category: "Salad",
+         offer:"ITEM AT 200"
     }, {
         id: "5",
         name: "Lasagna Rolls",
         image: food_5,
-        price: 14,
+        price: 200,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rolls",
+         offer:"₹50 OFF"
     }, {
         id: "6",
         name: "Peri Peri Rolls",
         image: food_6,
-        price: 12,
+        price: 150,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rolls",
+        offer:"₹30 OFF"
     }, {
         id: "7",
         name: "Chicken Rolls",
         image: food_7,
-        price: 20,
+        price: 200,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rolls",
+        offer:"₹30 OFF"
     }, {
         id: "8",
         name: "Veg Rolls",
         image: food_8,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rolls",
+        offer:"NEW"
     }, {
         id: "9",
         name: "Ripple Ice Cream",
         image: food_9,
-        price: 14,
+        price: 140,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
+        category: "Deserts",
+        offer:"NEW"
     }, {
         id: "10",
         name: "Fruit Ice Cream",
         image: food_10,
-        price: 22,
+        price: 300,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
+        category: "Deserts",
+         offer:"20% off"
     }, {
         id: "11",
         name: "Jar Ice Cream",
         image: food_11,
-        price: 10,
+        price: 200,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
+        category: "Deserts",
+        offer:"NEW"
     }, {
         id: "12",
         name: "Vanilla Ice Cream",
         image: food_12,
-        price: 12,
+        price: 300,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
+        category: "Deserts",
     },
     {
         id: "13",
@@ -266,9 +276,10 @@ export const food_list = [
         id: "14",
         name: "Vegan Sandwich",
         image: food_14,
-        price: 18,
+        price: 180,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Sandwich"
+        category: "Sandwich",
+        offer:"off 20%"
     }, {
         id: "15",
         name: "Grilled Sandwich",
@@ -515,7 +526,7 @@ export const food_list = [
         id: "48",
         name: "Classic Pizza",
         image: food_48,
-        price: 15,
+        price: 300,
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pizza"
     },
@@ -523,14 +534,9 @@ export const food_list = [
   id: "49",
   name: "MoJo Pizza",
   image: food_49,
-  price: 15, // base price (optional)
+  price: 150, // base price (optional)
   description: "Food provides essential nutrients for overall health and well-being",
   category: "Pizza",
-  sizes: [
-    { label: "Small", price: 10 },
-    { label: "Medium", price: 15 },
-    { label: "Large", price: 20 }
-  ]
 }
 
 

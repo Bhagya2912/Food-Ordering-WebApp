@@ -12,6 +12,19 @@ const SignUp = () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
+
+  if (!emailRegex.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  if (!phoneRegex.test(phone)) {
+    alert('Please enter a valid 10-digit phone number.');
+    return;
+  }
+
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
@@ -51,7 +64,7 @@ const SignUp = () => {
           <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" required className="w-full px-4 py-2 border rounded-md" />
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required className="w-full px-4 py-2 border rounded-md" />
           <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" required className="w-full px-4 py-2 border rounded-md" />
-          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition">Sign Up</button>
+          <button type="submit" className="w-full bg-orange-600 text-white py-2 rounded-md hover:bg-orange-600 transition">Sign Up</button>
         </form>
       </div>
     </div>

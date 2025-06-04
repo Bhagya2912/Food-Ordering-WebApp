@@ -90,7 +90,7 @@ const Profile = () => {
         </div>
 
         {/* Address */}
-        <div>
+        {/* <div>
           <h3 className="text-lg font-semibold text-gray-800 mb-2 flex items-center justify-between">
             Address
             <button className="text-sm text-orange-500 hover:underline flex items-center">
@@ -98,7 +98,7 @@ const Profile = () => {
             </button>
           </h3>
           <p className="text-gray-600">{user.address || "No address provided"}</p>
-        </div>
+        </div> */}
       </div>
 
       {/* Orders */}

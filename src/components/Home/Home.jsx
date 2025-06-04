@@ -9,6 +9,8 @@ import { BsMenuButtonWideFill } from 'react-icons/bs';
 
 function Home({ name, image, price, rating }) {
 
+const [successMessage, setSuccessMessage] = useState("");
+
     const [favorites, setFavorites] = useState([]);
       const [current, setCurrent] = useState(0);
    
@@ -48,6 +50,23 @@ const testimonials = [
   },
 ];
 
+const [timeLeft, setTimeLeft] = useState(43200); // 12 hours in seconds
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+  }, 1000);
+  return () => clearInterval(interval);
+}, []);
+
+const formatTime = (seconds) => {
+  const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
+  const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+  const s = String(seconds % 60).padStart(2, "0");
+  return `${h}:${m}:${s}`;
+};
+
+
 const toggleFavorite = (index) => {
     setFavorites((prev) =>
       prev.includes(index)
@@ -70,17 +89,24 @@ const toggleFavorite = (index) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your feedback!\n" + JSON.stringify(formData, null, 2));
-    // You can replace alert with API call to save feedback
-    setFormData({
-      name: "",
-      email: "",
-      foodItem: "",
-      rating: "5",
-      comments: "",
-    });
-  };
+  e.preventDefault();
+  setSuccessMessage("✅ Thank you for your feedback!");
+
+  // Optionally reset form
+  setFormData({
+    name: "",
+    email: "",
+    foodItem: "",
+    rating: "5",
+    comments: "",
+  });
+
+  // Clear message after 3 seconds
+  setTimeout(() => {
+    setSuccessMessage("");
+  }, 3000);
+};
+
 
 
 const brands = [
@@ -374,7 +400,13 @@ const brands = [
   </div>
 </section>
     
- <section className="py-12 px-4 mt-0">
+ <section className="relative py-12 px-4 mt-0">
+ <div className="absolute top-10 right-10 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20">
+  <div className="bg-orange-600 text-white text-xs sm:text-sm md:text-base font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center gap-2 animate-pulse">
+    ⏰ Offer ends in {formatTime(timeLeft)}
+  </div>
+</div>
+
       <div className="max-w-7xl mx-auto text-center mb-10">
         <h2 className="text-4xl font-bold text-red-600 mb-2">🍛 Today's Special</h2>
         <p className="text-gray-600">Hand-picked dishes curated by our chefs!</p>
@@ -384,59 +416,67 @@ const brands = [
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 max-w-7xl mx-auto">
         {food_list.slice(1, 11).map((item, index) => (
           <div
-            key={index}
-           className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
-          >
-            <img
-  onClick={() => navigate("/product-detail", { state: item })}
-  src={item.image}
-  alt={item.name}
-  className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
-/>
-
-
-            <div className="p-4">
-              <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-orange-600 font-semibold">₹{item.price}</span>
-                 <button
-  onClick={() =>
-    addToCart({
-      id: item.id, // Ensure `item.id` exists in your `food_list`
-      name: item.name,
-      price: item.price,
-      image: item.image,
-      rating: item.rating
-    })
-  }
-  className=" cursor-pointer bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
+  key={index}
+  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
 >
-  <i class="fa-solid fa-cart-plus"></i>{' '}
-  Add
-  
-</button>
-                 <button
-  onClick={() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    } else {
-      addToWishlist({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        rating: item.rating,
-      });
-    }
-  }}
-  className="cursor-pointer  bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
->
-  <i className="fa-solid fa-heart"></i>
-</button>
-              </div>
-            </div>
-          </div>
+  {/* 🏷️ Add relative wrapper to position the tag */}
+  <div className="relative">
+    {item.offer && (
+      <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow z-10">
+        {item.offer}
+      </div>
+    )}
+
+    <img
+      onClick={() => navigate("/product-detail", { state: item })}
+      src={item.image}
+      alt={item.name}
+      className="cursor-pointer w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-110"
+    />
+  </div>
+
+  <div className="p-4">
+    <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
+    <p className="text-sm text-gray-600">{item.description}</p>
+    <div className="flex justify-between items-center mt-4">
+      <span className="text-orange-600 font-semibold">₹{item.price}</span>
+      <button
+        onClick={() =>
+          addToCart({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            rating: item.rating,
+          })
+        }
+        className="cursor-pointer bg-emerald-600 text-white py-1 px-5 rounded hover:bg-emerald-700 transition duration-300"
+      >
+        <i className="fa-solid fa-cart-plus"></i> Add
+      </button>
+      <button
+        onClick={() => {
+          if (!isLoggedIn) {
+            navigate("/login");
+          } else {
+            addToWishlist({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              image: item.image,
+              rating: item.rating,
+            });
+          }
+        }}
+        className="cursor-pointer bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
+      >
+        <i className="fa-solid fa-heart"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+          
         ))}
       </div>
     </section>
@@ -608,7 +648,11 @@ const brands = [
             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </label>
-
+         {successMessage && (
+    <div className="mb-4 p-3 text-green-700 bg-green-100 border border-green-300 rounded text-center text-sm font-medium">
+      {successMessage}
+    </div>
+  )}
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition-colors"
