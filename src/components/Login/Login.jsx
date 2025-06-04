@@ -1,3 +1,4 @@
+// Login.js (Updated)
 import { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -5,40 +6,36 @@ import { AuthContext } from "../../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 👈 toggle visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useContext(AuthContext);
 
-  const [message, setMessage] = useState(null);
-const [messageType, setMessageType] = useState(""); // 'success' or 'error'
-
-
   const from = location.state?.from || "/home";
 
   const handleLogin = (e) => {
-  e.preventDefault();
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const user = users.find(
-    (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-  );
+    e.preventDefault();
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+    );
 
-  if (user) {
-    login(user);
-    setMessage("Login successful!");
-    setMessageType("success");
-    setTimeout(() => {
-      navigate(from, { replace: true });
-    }, 1000); // Wait briefly to show success message
-  } else {
-    setMessage("Invalid email or password.");
-    setMessageType("error");
-  }
-};
-
+    if (user) {
+      login(user);
+      setMessage("Login successful!");
+      setMessageType("success");
+      setTimeout(() => navigate(from, { replace: true }), 1000);
+    } else {
+      setMessage("Invalid email or password.");
+      setMessageType("error");
+    }
+  };
 
   return (
-    <div className="min-h-screen mb-5 bg-gray-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl overflow-hidden">
         <div className="md:w-1/2 h-64 md:h-auto">
           <img
@@ -56,43 +53,37 @@ const [messageType, setMessageType] = useState(""); // 'success' or 'error'
 
           <form className="space-y-5" onSubmit={handleLogin}>
             <div className="relative">
-  <input
-    type="email"
-    placeholder="Email ID"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    className="w-full px-12 py-3 rounded-full border border-gray-300"
-    required
-  />
-  <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
-    <i className="fa-solid fa-user"></i>
-  </span>
-</div>
+              <input
+                type="email"
+                placeholder="Email ID"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-12 py-3 rounded-full border border-gray-300"
+                required
+              />
+              <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
+                <i className="fa-solid fa-user"></i>
+              </span>
+            </div>
 
             <div className="relative">
-              
-              <div className="relative">
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    className="w-full px-12 py-3 rounded-full border border-gray-300 pr-12"
-    required
-  />
-  {/* Lock icon */}
-  <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
-    <i className="fa-solid fa-lock"></i>
-  </span>
-  {/* Eye toggle icon */}
-  <span
-    onClick={() => setShowPassword(!showPassword)}
-    className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 text-lg cursor-pointer"
-  >
-    <i className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
-  </span>
-</div>
-
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-12 py-3 rounded-full border border-gray-300 pr-12"
+                required
+              />
+              <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 text-lg">
+                <i className="fa-solid fa-lock"></i>
+              </span>
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 text-lg cursor-pointer"
+              >
+                <i className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+              </span>
             </div>
 
             <button
@@ -102,24 +93,18 @@ const [messageType, setMessageType] = useState(""); // 'success' or 'error'
               Login
             </button>
           </form>
-       {message && (
-  <div className="fixed bottom-5 right-5 z-50">
-    <div
-      className={`px-6 py-3 rounded-md shadow-md text-black font-medium transition-all duration-300 ${
-        messageType === "success"
-          ? "bg-white"
-          : "bg-green-500"
-      }`}
-    >
-      {message}
-    </div>
-  </div>
-)}
 
-
-    
-
-
+          {message && (
+            <div className="fixed bottom-5 right-5 z-50">
+              <div
+                className={`px-6 py-3 rounded-md shadow-md text-white font-medium transition-all duration-300 ${
+                  messageType === "success" ? "bg-green-500" : "bg-red-500"
+                }`}
+              >
+                {message}
+              </div>
+            </div>
+          )}
 
           <p className="text-center text-sm text-gray-400 mt-3">Forgot password?</p>
 
@@ -151,5 +136,3 @@ const [messageType, setMessageType] = useState(""); // 'success' or 'error'
 };
 
 export default Login;
-
-
