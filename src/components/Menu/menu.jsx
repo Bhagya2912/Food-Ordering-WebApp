@@ -79,13 +79,16 @@ const Menu = () => {
   };
 
   // Scroll category menu left/right
-  const scrollLeft = () => {
-    scrollRef.current?.scrollBy({ left: -200, behavior: "smooth" });
-  };
+ 
 
-  const scrollRight = () => {
-    scrollRef.current?.scrollBy({ left: 200, behavior: "smooth" });
-  };
+const scrollLeft = () => {
+  scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
+};
+
+const scrollRight = () => {
+  scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+};
+
 
   // Visible foods in "Popular Food Items" carousel (4 items)
   const visiblefoods = [
@@ -224,7 +227,7 @@ const Menu = () => {
       </section>
 
       <section className="py-8 bg-white px-12">
-  {/* 🔸 Custom Animation */}
+  {/* 🔸 Custom Animation & Scroll Buttons */}
   <style>{`
     .fade-up-button {
       opacity: 0;
@@ -236,22 +239,42 @@ const Menu = () => {
       opacity: 1;
       transform: translateY(0);
     }
+
+    .scroll-btn {
+      width: 38px;
+      height: 38px;
+      background-color: #f3f4f6; /* gray-100 */
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      background-color: #fed7aa; /* orange-100 */
+    }
   `}</style>
 
   <h2 className="text-4xl font-bold text-center text-black mb-6">Our Food Menu</h2>
 
-  {/* Scrollable Menu */}
-  <div className="relative px-10">
-    <button
-      onClick={scrollLeft}
-      className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
-    >
-      <ChevronLeft className="w-6 h-6 text-orange-600" />
-    </button>
+  {/* Buttons + Scrollable Menu */}
+  <div className="relative">
+    {/* Top-right Scroll Buttons */}
+    <div className="flex justify-end space-x-3 mb-3">
+      <button onClick={scrollLeft} className="scroll-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <button onClick={scrollRight} className="scroll-btn">
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
 
+    {/* Scrollable Menu */}
     <div
       ref={scrollRef}
-      className="flex overflow-x-auto space-x-7 scrollbar-hide scroll-smooth"
+      className="flex overflow-x-auto space-x-7 scrollbar-hide scroll-smooth px-2"
     >
       {menu_list.map((food, index) => (
         <div
@@ -268,13 +291,6 @@ const Menu = () => {
         </div>
       ))}
     </div>
-
-    <button
-      onClick={scrollRight}
-      className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-orange-100"
-    >
-      <ChevronRight className="w-6 h-6 text-orange-600" />
-    </button>
   </div>
 
   {/* Selected Category Foods */}
@@ -287,7 +303,6 @@ const Menu = () => {
             key={index}
             className="bg-white rounded-xl shadow-md p-4 flex flex-col group"
           >
-            {/* 🖼️ Image with Hover Buttons */}
             <div className="relative w-full h-48 rounded-md overflow-hidden">
               <img
                 onClick={() => navigate("/product-detail", { state: food })}
@@ -296,7 +311,6 @@ const Menu = () => {
                 className="cursor-pointer w-full h-full object-cover hover:scale-105 transition duration-300"
               />
 
-              {/* ✨ Animated Hover Buttons */}
               <div className="absolute bottom-2 left-0 right-0 flex justify-between px-3 fade-up-button pointer-events-none">
                 <button
                   onClick={() => addToCart(food)}
@@ -315,18 +329,17 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Food Info */}
             <h4 className="text-lg font-semibold mt-2">{food.name}</h4>
             <div className="flex justify-between items-center mt-1">
-  <p className="text-sm text-gray-500 capitalize">{food.category}</p>
-  <p className="text-sm font-bold text-orange-600">₹{food.price}</p>
-</div>
-
+              <p className="text-sm text-gray-500 capitalize">{food.category}</p>
+              <p className="text-sm font-bold text-orange-600">₹{food.price}</p>
+            </div>
           </div>
         ))}
     </div>
   )}
 </section>
+
 
 {/* 🌟 All Foods by Meal Category with Filters */}
 <section className="bg-white py-12 px-6">
