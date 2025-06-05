@@ -65,6 +65,15 @@ import food_46 from './food_46.png'
 import food_47 from './food_47.png'
 import food_48 from './food_48.png'
 import food_49 from './food_49.png'
+import food_50 from './food_50.png'
+import food_51 from './food_51.png'
+import food_52 from './food_52.png'
+import food_53 from './food_53.png'
+import food_54 from './food_54.png'
+import food_55 from './food_55.png'
+import food_56 from './food_56.png'
+import food_57 from './food_57.png'
+
 
 import add_icon_white from './add_icon_white.png'
 import add_icon_green from './add_icon_green.png'
@@ -164,6 +173,7 @@ export const menu_list = [
     menu_name: "Drink",
     menu_image: menu_10,
   },
+  
 
 ]
 
@@ -479,14 +489,16 @@ export const food_list = [
         id: "42",
         name: "Pohe",
         image: food_42,
-        price: 15,
+        price: 100,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Breakfast"
     },{
         id: "43",
         name: "Idali",
         image: food_43,
-        price: 15,
+        price: 170,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Breakfast"
     },
@@ -494,7 +506,8 @@ export const food_list = [
         id: "44",
         name: "Dosa",
         image: food_44,
-        price: 15,
+        price: 190,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Breakfast"
     },
@@ -502,7 +515,8 @@ export const food_list = [
         id: "45",
         name: "Anda Bhurji",
         image: food_45,
-        price: 15,
+        price: 160,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Breakfast"
     },
@@ -510,7 +524,7 @@ export const food_list = [
         id: "46",
         name: "Paneer Pizza",
         image: food_46,
-        price: 15,
+        price: 250,
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pizza"
     },
@@ -537,9 +551,79 @@ export const food_list = [
   price: 150, // base price (optional)
   description: "Food provides essential nutrients for overall health and well-being",
   category: "Pizza",
-}
-
-
+},
+{
+        id: "50",
+        name: "rice thali",
+        image: food_50,
+        price: 200,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Lunch"
+    },
+    {
+        id: "51",
+        name: "Chole Bhature",
+        image: food_51,
+        price: 153,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Lunch"
+    },
+    {
+        id: "52",
+        name: "Khima Pav",
+        image: food_52,
+        price: 150,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Lunch"
+    },
+     {
+        id: "53",
+        name: "Egg Curry with Steamed Rice",
+        image: food_53,
+        price: 150,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Lunch"
+    },
+    {
+        id: "54",
+        name: "Palak Paneer with Roti",
+        image: food_54,
+        price: 200,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Dinner"
+    },
+    {
+        id: "55",
+        name: "Vegetable Kofta Curry",
+        image: food_55,
+        price: 400,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Dinner"
+    },
+    {
+        id: "56",
+        name: "Grilled Chicken with Garlic Rice",
+        image: food_56,
+        price: 300,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Dinner"
+    },
+     {
+        id: "57",
+        name: "Prawn Masala with Steamed Rice",
+        image: food_57,
+        price: 300,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Dinner"
+    }
 
 ]
 
