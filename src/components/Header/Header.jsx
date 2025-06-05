@@ -157,11 +157,12 @@ const Header = () => {
         </div>
       ) : (
         <Link
-          to="/login"
-          className="cursor-pointer text-white ml-8 bg-orange-600 text-sm px-4 py-2 rounded font-semibold focus:outline-none"
-        >
-          Login <i className="fa-solid fa-user ml-1"></i>
-        </Link>
+  to="/login"
+  className="cursor-pointer bg-orange-600 text-white text-sm sm:text-base px-3 sm:px-4 py-2 rounded font-semibold focus:outline-none ml-4 sm:ml-8 w-auto"
+>
+  Login <i className="fa-solid fa-user ml-1"></i>
+</Link>
+
       )}
    
           </div>
