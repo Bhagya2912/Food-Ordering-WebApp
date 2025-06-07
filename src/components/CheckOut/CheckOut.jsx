@@ -7,7 +7,15 @@ const Checkout = () => {
   // <--- MODIFIED: Destructure cartItems, placeOrder, and clearCart from the CartContext
   const { cartItems, placeOrder, clearCart } = useCart();
 
-  const [addresses, setAddresses] = useState(() => JSON.parse(localStorage.getItem('addresses')) || []);
+ const [addresses, setAddresses] = useState(() => {
+  try {
+    const stored = JSON.parse(localStorage.getItem('addresses'));
+    return Array.isArray(stored) ? stored : [];
+  } catch (e) {
+    return [];
+  }
+});
+
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editData, setEditData] = useState(null);

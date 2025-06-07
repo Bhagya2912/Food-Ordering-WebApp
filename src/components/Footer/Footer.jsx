@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowUpLong } from "react-icons/fa6";
 
 
@@ -7,6 +7,31 @@ import { FaArrowUpLong } from "react-icons/fa6";
 function Footer() {
    const [scrollProgress, setScrollProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+const [email, setEmail] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    // Basic email regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleSubscribe = () => {
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    if (!isChecked) {
+      alert('Please agree to the Privacy Policy.');
+      return;
+    }
+    // Clear email field before navigating
+  setEmail('');
+   setIsChecked(false);
+
+    // If all good, navigate to homepage
+    navigate('/');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +49,41 @@ function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [message, setMessage] = useState('');
+const [popupUsed, setPopupUsed] = useState(false); // Track if user already clicked confirm/cancel
+
+
+  const handleCallClick = () => {
+    setShowPopup(true);
+    setMessage('');
+  };
+
+ const handleConfirmCall = () => {
+  setMessage('Calling now...');
+  setShowPopup(false);
+
+  // Auto-hide message after 3 seconds
+  setTimeout(() => {
+    setMessage('');
+  }, 500);
+
+  // Optional: Simulate call
+  // window.location.href = 'tel:+88012365499';
+};
+
+const handleCancel = () => {
+  setShowPopup(false);
+  setMessage('Call cancelled.');
+
+  // Auto-hide message after 3 seconds
+  setTimeout(() => {
+    setMessage('');
+  }, 500);
+};
+
+
 
 
   return (
@@ -44,8 +104,17 @@ function Footer() {
         <div className="flex items-center gap-4 mb-6 lg:mb-0">
           <div className="text-3xl"><i className="fas fa-envelope"></i></div>
           <div>
-            <p className="text-sm font-medium">Send Email</p>
-            <p className="text-lg font-semibold">foodieinfo@foodiemoodie.com</p>
+            <a
+  href="mailto:foodieinfo@foodiemoodie.com"
+  className="flex items-center gap-4 mb-6 lg:mb-0 hover:opacity-80 transition"
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <div>
+    <p className="text-sm font-medium">Send Email</p>
+    <p className="text-lg font-semibold">foodieinfo@foodiemoodie.com</p>
+  </div>
+</a>
           </div>
         </div>
 
@@ -60,11 +129,48 @@ function Footer() {
 
         {/* Call */}
         <div className="flex items-center gap-4">
-          <div className="text-3xl"><i className="fas fa-phone"></i></div>
-          <div>
-            <p className="text-sm font-medium">Call Emergency</p>
-            <p className="text-lg font-semibold">+88 0123 654 99</p>
+           <div className="relative">
+     
+       {/* Contact Section */}
+      <div
+        className="flex items-center gap-4 cursor-pointer hover:opacity-80 transition"
+        onClick={handleCallClick}
+      >
+        <div className="text-3xl"><i className="fas fa-phone"></i></div>
+        <div>
+          <p className="text-sm font-medium">Call Emergency</p>
+          <p className="text-lg font-semibold">+88 0123 654 99</p>
+        </div>
+      </div>
+
+      {/* Top-Aligned Popup */}
+      {showPopup && (
+        <div className="fixed top-15 left-1/2 transform -translate-x-1/2 bg-white px-6 py-4 rounded shadow-lg z-50 border border-gray-200">
+          <p className="text-base text-black font-semibold mb-2 text-center">Do you want to call?</p>
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={handleConfirmCall}
+              className="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Call
+            </button>
+            <button
+              onClick={handleCancel}
+              className="bg-red-500 text-white px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
           </div>
+        </div>
+      )}
+
+      {/* Auto-disappearing Message */}
+      {message && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded shadow-md z-50">
+          {message}
+        </div>
+      )}
+    </div>
         </div>
       </div>
 
@@ -85,12 +191,37 @@ Hungry? Let FoodieMoodie fix that."
 
 
           </p>
-          <div className="flex space-x-4">
-            <a href="#"><i className="fab fa-facebook-f border p-2 rounded hover:bg-white hover:text-black"></i></a>
-            <a href="#"><i className="fab fa-x-twitter border p-2 rounded hover:bg-white hover:text-black"></i></a>
-            <a href="#"><i className="fab fa-linkedin-in border p-2 rounded hover:bg-white hover:text-black"></i></a>
-            <a href="#"><i className="fab fa-youtube border p-2 rounded hover:bg-white hover:text-black"></i></a>
-          </div>
+         <div className="flex space-x-4">
+  <a
+    href="https://www.facebook.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i className="fab fa-facebook-f border p-2 rounded hover:bg-orange-500 hover:text-black"></i>
+  </a>
+  <a
+    href="https://www.instagram.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i className="fa-brands fa-instagram border p-2 rounded hover:bg-orange-500 hover:text-black"></i>
+  </a>
+  <a
+    href="https://www.linkedin.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i className="fab fa-linkedin-in border p-2 rounded hover:bg-orange-500 hover:text-black"></i>
+  </a>
+  <a
+    href="https://youtu.be/FWJlEHS6P0Q"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i className="fab fa-youtube border p-2 rounded hover:bg-orange-500 hover:text-black"></i>
+  </a>
+</div>
+
         </div>
 
         {/* Quick Links */}
@@ -113,42 +244,72 @@ Hungry? Let FoodieMoodie fix that."
         </div>
 
         {/* Our Menu */}
-        <div>
-          <Link to="/menu">
-  <h3 className="text-xl font-bold mb-4 cursor-pointer hover:text-orange-500 transition">
-    Our Menu
-  </h3>
-</Link>
-          <hr className="border-orange-500 w-10 mb-2" />
-          <ul className="space-y-2">
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Burger</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Pizza</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Fresh Food</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Breakfast</li>
-            <li><i className="fas fa-angles-right mr-2 text-orange-500"></i> Desserts</li>
-          </ul>
-        </div>
+       <div>
+  <Link to="/menu">
+    <h3 className="text-xl font-bold mb-4 cursor-pointer hover:text-orange-500 transition">
+      Our Menu
+    </h3>
+  </Link>
+  <hr className="border-orange-500 w-10 mb-2" />
+  <ul className="space-y-2">
+    <li>
+      <Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+        <i className="fas fa-angles-right mr-2 text-orange-500"></i> Pasta
+      </Link>
+    </li>
+    <li>
+      <Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+        <i className="fas fa-angles-right mr-2 text-orange-500"></i> Pizza
+      </Link>
+    </li>
+    <li>
+      <Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+        <i className="fas fa-angles-right mr-2 text-orange-500"></i> Fresh Food
+      </Link>
+    </li>
+    <li>
+      <Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+        <i className="fas fa-angles-right mr-2 text-orange-500"></i> Breakfast
+      </Link>
+    </li>
+    <li>
+      <Link to="/menu" className="flex items-center hover:text-orange-500 transition">
+        <i className="fas fa-angles-right mr-2 text-orange-500"></i> Desserts
+      </Link>
+    </li>
+  </ul>
+</div>
+
 
         {/* Contact Us */}
         <div>
-          <h3 className="text-xl font-bold mb-4">Subscribe</h3>
-          <div className="flex items-center mb-4">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="p-2 rounded-l border-1 bg-white text-black w-full"
-            />
-            <button className="bg-orange-500 ml-1 p-2 rounded-r">
-              <i className="fas fa-arrow-right text-black"></i>
-            </button>
-          </div>
-          <div className="flex items-center space-x-2">
-            <input type="checkbox" id="policy" />
-            <label htmlFor="policy" className="text-sm text-black">
-              I agree to the <a href="#" className="underline text-black">Privacy Policy.</a>
-            </label>
-          </div>
-          </div>
+      <h3 className="text-xl font-bold mb-4">Subscribe</h3>
+
+      <div className="flex items-center mb-4">
+        <input
+          type="email"
+          placeholder="Your email address"
+          className="p-2 rounded-l border bg-white text-black w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button className="bg-orange-500 ml-1 p-2 rounded-r" onClick={handleSubscribe}>
+          <i className="fas fa-arrow-right text-black"></i>
+        </button>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id="policy"
+          checked={isChecked}
+          onChange={(e) => setIsChecked(e.target.checked)}
+        />
+        <label htmlFor="policy" className="text-sm text-black">
+          I agree to the <a href="#" className="underline text-black">Privacy Policy.</a>
+        </label>
+      </div>
+    </div>
      
                     
                     <div

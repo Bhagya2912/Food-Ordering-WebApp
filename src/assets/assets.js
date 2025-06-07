@@ -15,6 +15,7 @@ import menu_10 from './menu_10.png'
 import menu_11 from './menu_11.png'
 import menu_12 from './menu_12.png'
 import menu_13 from './menu_13.png'
+import menu_14 from './menu_14.png'
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -73,6 +74,10 @@ import food_54 from './food_54.png'
 import food_55 from './food_55.png'
 import food_56 from './food_56.png'
 import food_57 from './food_57.png'
+import food_58 from './food_58.png'
+import food_59 from './food_59.png'
+import food_60 from './food_60.png'
+import food_61 from './food_61.png'
 
 
 import add_icon_white from './add_icon_white.png'
@@ -173,7 +178,10 @@ export const menu_list = [
     menu_name: "Drink",
     menu_image: menu_10,
   },
-  
+  {
+    menu_name: "Burger",
+    menu_image: menu_14,
+  },
 
 ]
 
@@ -183,6 +191,7 @@ export const food_list = [
         name: "Greek salad",
         image: food_1,
         price: 120,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Salad",
     },
@@ -191,6 +200,7 @@ export const food_list = [
         name: "Veg salad",
         image: food_2,
         price: 180,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Salad",
         offer:"20% off upto 100"
@@ -199,6 +209,7 @@ export const food_list = [
         name: "Clover Salad",
         image: food_3,
         price: 160,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Salad",
         offer:"20% off upto 200"
@@ -207,6 +218,7 @@ export const food_list = [
         name: "Chicken Salad",
         image: food_4,
         price: 240,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Salad",
          offer:"ITEM AT 200"
@@ -215,6 +227,7 @@ export const food_list = [
         name: "Lasagna Rolls",
         image: food_5,
         price: 200,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Rolls",
          offer:"₹50 OFF"
@@ -223,6 +236,7 @@ export const food_list = [
         name: "Peri Peri Rolls",
         image: food_6,
         price: 150,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Rolls",
         offer:"₹30 OFF"
@@ -231,6 +245,7 @@ export const food_list = [
         name: "Chicken Rolls",
         image: food_7,
         price: 200,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Rolls",
         offer:"₹30 OFF"
@@ -239,6 +254,7 @@ export const food_list = [
         name: "Veg Rolls",
         image: food_8,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Rolls",
         offer:"NEW"
@@ -279,6 +295,7 @@ export const food_list = [
         name: "Chicken Sandwich",
         image: food_13,
         price: 12,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Sandwich"
     },
@@ -287,6 +304,7 @@ export const food_list = [
         name: "Vegan Sandwich",
         image: food_14,
         price: 180,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Sandwich",
         offer:"off 20%"
@@ -295,6 +313,7 @@ export const food_list = [
         name: "Grilled Sandwich",
         image: food_15,
         price: 16,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Sandwich"
     }, {
@@ -302,6 +321,7 @@ export const food_list = [
         name: "Bread Sandwich",
         image: food_16,
         price: 24,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Sandwich"
     }, {
@@ -309,6 +329,7 @@ export const food_list = [
         name: "Cup Cake",
         image: food_17,
         price: 14,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Cake"
     }, {
@@ -316,6 +337,7 @@ export const food_list = [
         name: "Vegan Cake",
         image: food_18,
         price: 12,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Cake"
     }, {
@@ -323,6 +345,7 @@ export const food_list = [
         name: "Butterscotch Cake",
         image: food_19,
         price: 20,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Cake"
     }, {
@@ -330,6 +353,7 @@ export const food_list = [
         name: "Sliced Cake",
         image: food_20,
         price: 15,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Cake"
     }, {
@@ -337,6 +361,7 @@ export const food_list = [
         name: "Garlic Mushroom ",
         image: food_21,
         price: 14,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pure Veg"
     }, {
@@ -344,6 +369,7 @@ export const food_list = [
         name: "Fried Cauliflower",
         image: food_22,
         price: 22,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pure Veg"
     }, {
@@ -351,6 +377,7 @@ export const food_list = [
         name: "Mix Veg Pulao",
         image: food_23,
         price: 10,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pure Veg"
     }, {
@@ -358,6 +385,7 @@ export const food_list = [
         name: "Rice Zucchini",
         image: food_24,
         price: 12,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pure Veg"
     },
@@ -366,6 +394,7 @@ export const food_list = [
         name: "Cheese Pasta",
         image: food_25,
         price: 12,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pasta"
     },
@@ -374,6 +403,7 @@ export const food_list = [
         name: "Tomato Pasta",
         image: food_26,
         price: 18,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pasta"
     }, {
@@ -381,6 +411,7 @@ export const food_list = [
         name: "Creamy Pasta",
         image: food_27,
         price: 16,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pasta"
     }, {
@@ -388,6 +419,7 @@ export const food_list = [
         name: "Chicken Pasta",
         image: food_28,
         price: 24,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pasta"
     }, {
@@ -395,6 +427,7 @@ export const food_list = [
         name: "Buttter Noodles",
         image: food_29,
         price: 14,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Noodles"
     }, {
@@ -402,6 +435,7 @@ export const food_list = [
         name: "Veg Noodles",
         image: food_30,
         price: 12,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Noodles"
     }, {
@@ -409,6 +443,7 @@ export const food_list = [
         name: "Somen Noodles",
         image: food_31,
         price: 20,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Noodles"
     }, {
@@ -416,6 +451,7 @@ export const food_list = [
         name: "Cooked Noodles",
         image: food_32,
         price: 15,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Noodles"
     },{
@@ -430,6 +466,7 @@ export const food_list = [
         name: "chicken kabab",
         image: food_34,
         price: 15,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Non-Veg"
     },{
@@ -437,6 +474,7 @@ export const food_list = [
         name: "Orange juice",
         image: food_35,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Drink"
     },
@@ -445,6 +483,7 @@ export const food_list = [
         name: "Sugarcane  juice",
         image: food_36,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Drink"
     },
@@ -453,6 +492,7 @@ export const food_list = [
         name: "Straberry juice",
         image: food_37,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Drink"
     },{
@@ -460,6 +500,7 @@ export const food_list = [
         name: "chicken Biryani",
         image: food_39,
         price: 15,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Biryani"
     },{
@@ -467,6 +508,7 @@ export const food_list = [
         name: "Veg Biryani",
         image: food_38,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Biryani"
     },
@@ -475,6 +517,7 @@ export const food_list = [
         name: "Hydrabadi Biryani",
         image: food_40,
         price: 15,
+        type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Biryani"
     },
@@ -483,6 +526,7 @@ export const food_list = [
         name: "Dam Biryani",
         image: food_41,
         price: 15,
+        type:"veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Biryani"
     },{
@@ -623,7 +667,41 @@ export const food_list = [
         type:"non-veg",
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Dinner"
+    },
+    {
+        id: "58",
+        name: "Melody beef",
+        image: food_58,
+        price: 150,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Burger"
+    },{
+        id: "59",
+        name: "Veg Burger",
+        image: food_59,
+        price: 365,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Burger"
+    },
+    {
+        id: "60",
+        name: "Burger",
+        image: food_60,
+        price: 285,
+        type:"non-veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Burger"
+    },
+    {
+        id: "61",
+        name: "HamBurger",
+        image: food_61,
+        price: 250,
+        type:"veg",
+        description: "Food provides essential nutrients for overall health and well-being",
+        category: "Burger"
     }
-
 ]
 

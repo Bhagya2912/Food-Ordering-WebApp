@@ -1,146 +1,131 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { AuthContext } from './AuthContext'; // ✅ Import AuthContext
 
-
-// Create the Cart context
+// Create CartContext
 const CartContext = createContext();
 
-
-// Hook to use the CartContext
+// Hook to use CartContext
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  // Cart state
-  const [cartItems, setCartItems] = useState(() => {
-    try {
-      const storedCart = localStorage.getItem('cartItems');
-      return storedCart ? JSON.parse(storedCart) : [];
-    } catch (error) {
-      console.error('Failed to parse cart from localStorage:', error);
-      return [];
-    }
-  });
+  const { user } = useContext(AuthContext); // ✅ Get current user
 
-  // Wishlist state
-  const [wishlistItems, setWishlistItems] = useState(() => {
-    try {
-      const storedWishlist = localStorage.getItem('wishlistItems');
-      return storedWishlist ? JSON.parse(storedWishlist) : [];
-    } catch (error) {
-      console.error('Failed to parse wishlist from localStorage:', error);
-      return [];
-    }
-  });
+  // States
+  const [cartItems, setCartItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const [orderHistory, setOrderHistory] = useState([]);
 
-  
-
-  // Order history state
-  const [orderHistory, setOrderHistory] = useState(() => {
-    try {
-      const storedOrders = localStorage.getItem('orderHistory');
-      return storedOrders ? JSON.parse(storedOrders) : [];
-    } catch (error) {
-      console.error('Failed to parse order history from localStorage:', error);
-      return [];
-    }
-  });
-
-  // Sync cart to localStorage
+  // ✅ Load user-specific data on login
   useEffect(() => {
-    try {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    } catch (error) {
-      console.error('Failed to save cart to localStorage:', error);
+    if (user?.email) {
+      try {
+        const cart = localStorage.getItem(`cart_${user.email}`);
+        const wishlist = localStorage.getItem(`wishlist_${user.email}`);
+        const orders = localStorage.getItem(`orders_${user.email}`);
+        setCartItems(cart ? JSON.parse(cart) : []);
+        setWishlistItems(wishlist ? JSON.parse(wishlist) : []);
+        setOrderHistory(orders ? JSON.parse(orders) : []);
+      } catch (error) {
+        console.error("Error loading user-specific data:", error);
+        setCartItems([]);
+        setWishlistItems([]);
+        setOrderHistory([]);
+      }
+    } else {
+      // Clear data if no user
+      setCartItems([]);
+      setWishlistItems([]);
+      setOrderHistory([]);
     }
-  }, [cartItems]);
+  }, [user]);
 
-  // Sync wishlist to localStorage
+  // ✅ Save user-specific cart to localStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
-    } catch (error) {
-      console.error('Failed to save wishlist to localStorage:', error);
+    if (user?.email) {
+      localStorage.setItem(`cart_${user.email}`, JSON.stringify(cartItems));
     }
-  }, [wishlistItems]);
+  }, [cartItems, user]);
 
-  // Sync order history to localStorage
+  // ✅ Save user-specific wishlist to localStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
-    } catch (error) {
-      console.error('Failed to save order history to localStorage:', error);
+    if (user?.email) {
+      localStorage.setItem(`wishlist_${user.email}`, JSON.stringify(wishlistItems));
     }
-  }, [orderHistory]);
+  }, [wishlistItems, user]);
 
-  // Add item to cart
+  // ✅ Save user-specific order history to localStorage
+  useEffect(() => {
+    if (user?.email) {
+      localStorage.setItem(`orders_${user.email}`, JSON.stringify(orderHistory));
+    }
+  }, [orderHistory, user]);
+
+  // 🛒 Add to Cart
   const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find(item => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map(item =>
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + (product.quantity || 1) }
             : item
         );
       } else {
-        return [...prevItems, { ...product, quantity: product.quantity || 1 }];
+        return [...prev, { ...product, quantity: product.quantity || 1 }];
       }
     });
   };
 
-  // Remove item from cart
+  // ❌ Remove from Cart
   const removeFromCart = (id) => {
-    setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Update quantity
+  // 🔄 Update Quantity
   const updateQuantity = (id, quantity) => {
     if (quantity < 1) return;
-    setCartItems((prevItems) =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
   };
 
-  // Clear cart
+  // 🧹 Clear Cart
   const clearCart = () => {
     setCartItems([]);
   };
 
-  // Add item to wishlist
+  // ❤️ Add to Wishlist
   const addToWishlist = (product) => {
-    setWishlistItems((prevItems) => {
-      if (prevItems.find(item => item.id === product.id)) {
-        return prevItems; // already exists
-      }
-      return [...prevItems, product];
+    setWishlistItems((prev) => {
+      const exists = prev.find((item) => item.id === product.id);
+      return exists ? prev : [...prev, product];
     });
   };
 
-  // Remove item from wishlist
+  // 💔 Remove from Wishlist
   const removeFromWishlist = (id) => {
-    setWishlistItems((prevItems) => prevItems.filter(item => item.id !== id));
+    setWishlistItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Place order
+  // 🧾 Place Order
   const placeOrder = () => {
     if (cartItems.length === 0) {
       console.warn("Cannot place order: Cart is empty");
       return;
     }
+
     const order = {
       id: Date.now(),
-      date: new Date().toISOString().split('T')[0],
-      items: [...cartItems], // Clone to avoid mutating
+      date: new Date().toISOString().split("T")[0],
+      items: [...cartItems],
       total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
       status: "Pending",
     };
-    console.log("Order placed:", order); // Debug log
-    setOrderHistory((prevOrders) => [...prevOrders, order]);
+
+    setOrderHistory((prev) => [...prev, order]);
     clearCart();
   };
 
- 
   return (
     <CartContext.Provider
       value={{
@@ -154,7 +139,6 @@ export const CartProvider = ({ children }) => {
         removeFromWishlist,
         orderHistory,
         placeOrder,
-      
       }}
     >
       {children}

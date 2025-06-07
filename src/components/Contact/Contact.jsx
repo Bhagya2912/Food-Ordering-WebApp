@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [error, setError] = useState('');
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const validateEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+
+    // Validation
+    if (!name || !email || !message) {
+      setError('All fields are required.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email.');
+      return;
+    }
+
+    // Clear error & show success popup
+    setError('');
+    setPopupMessage('Thank you so much to contact with us!');
+
+    // Reset form
+    setFormData({ name: '', email: '', message: '' });
+
+    // Auto-hide popup after 3s
+    setTimeout(() => {
+      setPopupMessage('');
+    }, 3000);
+  };
+
   return (
    <div className="font-sans text-gray-800">
 
@@ -15,38 +50,55 @@ const Contact = () => {
       </div>
 
       {/* Questions Form */}
-      <section className="text-center py-12 px-4">
-        <h2 className="text-2xl font-semibold mb-6">HAVE ANY QUESTIONS</h2>
-        <p className="mb-6 max-w-xl mx-auto text-gray-600">
-          Want to share ideas or ask your inquiries? Use the form below or email us directly at
-          <span className="text-green-600 font-medium"> contact@moodiefoodie.com</span>
-        </p>
-        <form className="max-w-lg mx-auto space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              placeholder="Name"
-              className="w-full px-4 py-2 border border-gray-300 rounded"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full px-4 py-2 border border-gray-300 rounded"
-            />
-          </div>
-          <textarea
-            rows="4"
-            placeholder="Message"
+       <section className="text-center py-12 px-4 relative">
+      <h2 className="text-2xl font-semibold mb-6">HAVE ANY QUESTIONS</h2>
+      <p className="mb-6 max-w-xl mx-auto text-gray-600">
+        Want to share ideas or ask your inquiries? Use the form below or email us directly at
+        <span className="text-green-600 font-medium"> contact@moodiefoodie.com</span>
+      </p>
+
+      {popupMessage && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-md z-50">
+          {popupMessage}
+        </div>
+      )}
+
+      {error && (
+        <div className="text-red-600 mb-4 font-medium">{error}</div>
+      )}
+
+      <form className="max-w-lg mx-auto space-y-4" onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded"
           />
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
-          >
-            SUBMIT
-          </button>
-        </form>
-      </section>
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded"
+          />
+        </div>
+        <textarea
+          rows="4"
+          placeholder="Message"
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className="w-full px-4 py-2 border border-gray-300 rounded"
+        />
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+        >
+          SUBMIT
+        </button>
+      </form>
+    </section>
 
       {/* Opening Hours */}
       <section className="bg-green-50 py-12 text-center">

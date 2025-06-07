@@ -15,7 +15,7 @@ const [successMessage, setSuccessMessage] = useState("");
       const [current, setCurrent] = useState(0);
    
     const { addToCart } = useCart();
-    const { wishlistItems,addToWishlist } = useCart();
+    const { wishlistItems,addToWishlist,removeFromWishlist } = useCart();
 
     const [user, setUser] = useState(null);
 
@@ -107,7 +107,8 @@ const toggleFavorite = (index) => {
   }, 3000);
 };
 
-
+const [selectedDish, setSelectedDish] = useState(null);
+const [showModal, setShowModal] = useState(false);
 
 const brands = [
   'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo%2C-hotel-logo-design-template-21c636096aeb4439217e7a2731d16f7d_screen.jpg?ts=1665470337',
@@ -219,7 +220,19 @@ const brands = [
       />
     <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+    <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Paneer Butter Masala",
+      image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600.jpg",
+      description:
+        "A creamy, mildly spiced North Indian curry made with soft paneer cubes, tomatoes, cashews, and butter. A favorite in every Indian restaurant.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -237,7 +250,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+  <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Hyderabadi Biryani",
+      image: "https://images.pexels.com/photos/14731625/pexels-photo-14731625.jpeg?auto=compress&cs=tinysrgb&w=600.jpg",
+      description:
+        "Hyderabadi Biryani is a fragrant rice dish layered with marinated meat, saffron, fried onions, and herbs. It’s known for its royal taste and aroma.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -255,7 +280,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+  <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Masala Dosa",
+      image: "https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg?auto=compress&cs=tinysrgb&w=600.jpg",
+      description:
+        "Masala Dosa is a crispy South Indian crepe made from fermented rice and lentil batter, filled with spiced mashed potatoes and served with chutneys and sambar.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -274,7 +311,19 @@ const brands = [
     />
     <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
       <span className="text-sm font-medium mb-2">Delicious Dish</span>
-      <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+      <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Noodles",
+      image: "https://i.imgur.com/1Ss39Hq.jpg",
+      description:
+        "Noodles are a versatile and beloved dish, often served with vegetables, sauces, and proteins. This version features a tangy and spicy flavor profile perfect for any craving.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
     </div>
   </div>
   <div>
@@ -294,7 +343,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+  <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Uttapam",
+      image: "https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
+      description:
+        "A soft and thick South Indian pancake made from fermented rice and urad dal batter, topped with chopped onions, tomatoes, green chilies, and coriander.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -312,7 +373,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+   <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Sushi",
+      image: "https://i.imgur.com/ZkDcLbW.jpg",
+      description:
+        "A traditional Japanese dish made with vinegared rice, seafood or vegetables, and wrapped in seaweed. Often served with wasabi, soy sauce, and pickled ginger.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -330,7 +403,19 @@ const brands = [
       />
       <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+ <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Pasta",
+      image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
+      description:
+        "A classic Italian dish made from durum wheat, typically tossed in sauces like tomato, Alfredo, or pesto. Served with herbs and grated cheese.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -348,7 +433,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+ <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Burger",
+      image: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
+      description:
+        "A popular American-style sandwich consisting of a grilled meat or veggie patty, fresh lettuce, tomato, cheese, and sauces, all stacked between two buns.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -366,7 +463,19 @@ const brands = [
       />
         <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+ <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Fried Momos",
+      image: "https://images.pexels.com/photos/28445591/pexels-photo-28445591/free-photo-of-crispy-cheese-corn-momos-with-tangy-sauce.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2.jpg",
+      description:
+        "Crispy pan-fried dumplings filled with a delicious mixture of vegetables or minced meat, seasoned with spices. Served hot with spicy red chutney.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -384,7 +493,19 @@ const brands = [
       />
        <div className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300 rounded">
   <span className="text-sm font-medium mb-2">Delicious Dish</span>
-  <button className="bg-white text-black px-2 py-1 text-sm rounded">Read more</button>
+  <button
+  className="cursor-pointer bg-white text-black px-2 py-1 text-sm rounded"
+  onClick={() =>
+    setSelectedDish({
+      name: "Chicken",
+      image: "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "Tender pieces of chicken cooked in aromatic Indian spices, either grilled, fried, or in curry form. Rich in flavor and served with naan or rice.",
+    }) || setShowModal(true)
+  }
+>
+  Read more
+</button>
 </div>
     </div>
     <div>
@@ -398,6 +519,28 @@ const brands = [
           className="bg-orange-600 hover:bg-orange-700 text-white justify-center mt-5 px-6 py-2 rounded">View more</button>
         </div>
   </div>
+  {showModal && selectedDish && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md relative">
+      <button
+        onClick={() => setShowModal(false)}
+        className="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-xl font-bold"
+      >
+        &times;
+      </button>
+      <img
+        src={selectedDish.image}
+        alt={selectedDish.name}
+        className="w-full h-48 object-cover rounded mb-4"
+      />
+      <h2 className="text-2xl font-bold text-orange-600 mb-2">
+        {selectedDish.name}
+      </h2>
+      <p className="text-gray-700">{selectedDish.description}</p>
+    </div>
+  </div>
+)}
+
 </section>
     
  <section className="relative py-12 px-4 mt-0">
@@ -410,7 +553,6 @@ const brands = [
       <div className="max-w-7xl mx-auto text-center mb-10">
         <h2 className="text-4xl font-bold text-red-600 mb-2">🍛 Today's Special</h2>
         <p className="text-gray-600">Hand-picked dishes curated by our chefs!</p>
-        
       </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 max-w-7xl mx-auto">
@@ -454,24 +596,47 @@ const brands = [
       >
         <i className="fa-solid fa-cart-plus"></i> Add
       </button>
-      <button
-        onClick={() => {
-          if (!isLoggedIn) {
-            navigate("/login");
-          } else {
-            addToWishlist({
-              id: item.id,
-              name: item.name,
-              price: item.price,
-              image: item.image,
-              rating: item.rating,
-            });
-          }
-        }}
-        className="cursor-pointer bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
-      >
-        <i className="fa-solid fa-heart"></i>
-      </button>
+     <button
+  onClick={() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      const alreadyInWishlist = wishlistItems.some((i) => i.id === item.id);
+      if (alreadyInWishlist) {
+        removeFromWishlist(item.id);
+      } else {
+        addToWishlist({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          rating: item.rating,
+        });
+      }
+    }
+  }}
+  className="
+    cursor-pointer 
+    w-10 h-10 
+    rounded-full 
+    bg-white 
+    flex items-center justify-center 
+    shadow-md 
+    transition duration-300 
+    hover:bg-red-50
+    border border-red-300
+    pointer-events-auto
+  "
+>
+  <i
+    className={`fa-solid fa-heart ${
+      wishlistItems.some((i) => i.id === item.id)
+        ? "text-red-600"
+        : "text-gray-400"
+    }`}
+  ></i>
+</button>
+
     </div>
   </div>
 </div>
@@ -505,39 +670,54 @@ const brands = [
 />
 
                 
-                 <button
-  onClick={() =>
-    addToCart({
-      id: item.id, // Ensure `item.id` exists in your `food_list`
-      name: item.name,
-      price: item.price,
-      image: item.image,
-      rating: item.rating
-    })
-  }
-  className="mt-5 cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
->
-  <i class="fa-solid fa-cart-plus"></i>{'  '}
-  Add
-</button>
-              <button
-  onClick={() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    } else {
-      addToWishlist({
+                <div className="flex items-center gap-20">
+  <button
+    onClick={() =>
+      addToCart({
         id: item.id,
         name: item.name,
         price: item.price,
         image: item.image,
         rating: item.rating,
-      });
+      })
     }
-  }}
-  className="cursor-pointer ml-20 bg-white text-red-500 px-3 py-1.5 rounded-full border border-red-300 hover:bg-red-50 transition duration-300 shadow-sm text-sm"
->
-  <i className="fa-solid fa-heart"></i>
-</button>
+    className="cursor-pointer bg-emerald-600 text-white py-1 px-4 rounded hover:bg-emerald-700 transition duration-300"
+  >
+    <i className="fa-solid fa-cart-plus"></i>{'  '}
+    Add
+  </button>
+
+  <button
+    onClick={() => {
+      if (!isLoggedIn) {
+        navigate("/login");
+      } else {
+        const alreadyInWishlist = wishlistItems.some((i) => i.id === item.id);
+        if (alreadyInWishlist) {
+          removeFromWishlist(item.id);
+        } else {
+          addToWishlist({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            rating: item.rating,
+          });
+        }
+      }
+    }}
+    className="cursor-pointer w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition duration-300"
+  >
+    <i
+      className={`fa-solid fa-heart ${
+        wishlistItems.some((i) => i.id === item.id)
+          ? "text-red-600"
+          : "text-gray-400"
+      }`}
+    ></i>
+  </button>
+</div>
+
 
               </div>
             ))}

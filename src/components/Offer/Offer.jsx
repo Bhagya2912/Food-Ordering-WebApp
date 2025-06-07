@@ -39,7 +39,7 @@ const offers = [
 const Offer = () => {
   return (
     <>
-      <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-100">
+      <div className="relative overflow-hidden min-h-screen  via-white to-yellow-100">
         {/* Floating Images */}
         <img
           src="https://t4.ftcdn.net/jpg/01/69/56/95/360_F_169569546_zaLG8x4tyIu3SDn1jYWXThVpMjCEbn8Q.jpg"
@@ -93,7 +93,7 @@ const Offer = () => {
           </p>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div className="bg-white/60 backdrop-blur-lg rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300">
+            <div className="backdrop-blur-lg rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300">
               <h2 className="text-2xl font-semibold  text-gray-800">Free Delivery</h2>
               <p className="text-gray-600">Get free delivery on orders above ₹200. Save more when you order in bulk.</p>
             </div>

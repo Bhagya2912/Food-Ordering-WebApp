@@ -31,7 +31,7 @@ const Productdetails = () => {
   const { state: product } = useLocation();
   const { addToCart} = useCart(); // ✅ Access addToCart
   const [quantity, setQuantity] = useState(1);
-   const { wishlistItems,addToWishlist } = useCart();
+   const { wishlistItems,addToWishlist,removeFromWishlist } = useCart();
 
   const increaseQuantity = () => setQuantity(prev => prev + 1);
   const decreaseQuantity = () => {
@@ -98,7 +98,7 @@ const Productdetails = () => {
                 +
               </button>
             </div>
-
+             <div className="flex items-center gap-20">
             <button
               className="cursor-pointer mt-5 mr-6 bg-emerald-600 text-white  py-1 px-5 rounded hover:bg-emerald-700  transition duration-300"
               onClick={() =>
@@ -107,14 +107,41 @@ const Productdetails = () => {
             >
              <i className="fa-solid fa-cart-plus"></i>  Add To Cart
             </button>
-            <button
-              className="cursor-pointer bg-white text-red-500 py-1 px-5 rounded-full border border-red-300 hover:bg-red-50  transition duration-300"
-              onClick={() =>
-                addToWishlist({ ...product, quantity })
-              }
-            >
-             <i className="fa-solid fa-heart "></i>
-            </button>
+           <button
+  onClick={() => {
+    if (!localStorage.getItem("isLoggedIn")) {
+      navigate("/login");
+    } else {
+      const alreadyInWishlist = wishlistItems.some(
+        (item) => item.id === product.id
+      );
+
+      if (alreadyInWishlist) {
+        removeFromWishlist(product.id);
+      } else {
+        addToWishlist({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          rating: product.rating,
+        });
+      }
+    }
+  }}
+  className="relative cursor-pointer mt-3 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition duration-300  pointer-events-auto"
+>
+  <i
+    className={`fa-solid fa-heart ${
+      wishlistItems.some((item) => item.id === product.id)
+        ? "text-red-600"
+        : "text-gray-400"
+    }`}
+  ></i>
+</button>
+
+</div>
+
           </div>
           
         </div>
