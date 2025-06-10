@@ -175,7 +175,7 @@ const Header = () => {
             } flex-col lg:flex lg:flex-row lg:space-x-8 w-full lg:w-auto lg:order-1 mt-4 lg:mt-0`}
             id="mobile-menu"
           >
-            <ul className="flex flex-col lg:flex-row font-medium w-full">
+            <ul className="flex flex-col lg:flex-row font-medium w-full mt-2">
               <li>
                 <NavLink
                   to="/"
@@ -226,18 +226,23 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
-                  to="/offer"
-                 className={({ isActive }) =>
-                 `flex items-center gap-1 py-2 px-3 mr-2 ${ isActive ? "text-orange-500" : "text-black"} hover:text-orange-700`}
-                  onClick={() => setMenuOpen(false)}
-                  aria-label="Menu"
-                >
-                  Offer<BadgePercent className="w-5 h-5 text-orange-600" />
-                </NavLink>
+      to="/offer"
+      className={({ isActive }) =>
+        `flex items-center gap-1 py-2 px-3 mr-2 ${
+          isActive ? "text-orange-500" : "text-black"
+        } hover:text-orange-700`
+      }
+      onClick={() => setMenuOpen(false)}
+      aria-label="Menu"
+    >
+      <BadgePercent className="w-5 h-5 text-black" />
+      <span className="font-medium text-black">Offers</span>
+      <span className="text-[10px] font-bold text-orange-500 ml-1 mb-3">NEW</span>
+    </NavLink>
               </li>
             </ul>
 
-            <div className="hidden text-black lg:flex items-center gap-4 ml-0 mr-4">
+            <div className="hidden text-black lg:flex items-center gap-4 ml-0 mr-12">
               <SearchBar />
             </div>
           </div>
