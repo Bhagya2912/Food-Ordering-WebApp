@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo,useEffect,useRef } from "react";
 import { assets, menu_list, food_list } from "../../assets/assets";
 
 const restaurant_list = [
@@ -106,6 +106,14 @@ export default function Offer() {
 
    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
+   const videoList = [
+  "https://v1.pinimg.com/videos/iht/720p/63/f4/48/63f448af408a47e80cc32e50f997b18a.mp4",
+  "https://v1.pinimg.com/videos/mc/720p/a4/44/af/a444af7b1f8747fd47b985e6ced587dc.mp4",
+  "https://v1.pinimg.com/videos/mc/720p/65/ab/54/65ab54a613d1ee4da37b9377bef641eb.mp4",
+  "https://v1.pinimg.com/videos/mc/720p/c0/27/96/c027969ccbe7fdd4be978f8dd368188b.mp4",
+];
+
+
   const filteredFoods = useMemo(() => {
     return food_list
       .filter((item) => (vegOnly ? item.type === "veg" : true))
@@ -117,99 +125,167 @@ export default function Offer() {
       priceAsc ? a.priceLevel - b.priceLevel : b.priceLevel - a.priceLevel
     );
   }, [priceAsc]);
+  
+  const [visibleCount, setVisibleCount] = useState(4);
+
+
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % videoList.length);
+    }, 5000); // Change video every 5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
+    const [current, setCurrent] = useState(0);
+  const videoRef = useRef(null);
+
+  // When video ends, go to next
+  const handleVideoEnd = () => {
+    setCurrent((prev) => (prev + 1) % videoList.length);
+  };
 
   return (
     <div className="bg-white text-gray-800">
       {/* Section 1 - Hero */}
-    <section className="relative w-full h-130 aspect-video overflow-hidden">
-  {/* Overlay Text */}
-   <div
-    class="relative z-30 justify-center p-5 text-2xl text-white bg-opacity-50 "
-  >
-    Welcome to my site!
-  </div>
-  
-  {/* Verified Working Video */}
-  <video
-    className="absolute top-0 left-0 w-full h-full object-cover"
-    src="https://media.istockphoto.com/id/1370577660/video/happy-young-couple-ordering-food-online-with-smartphone-at-home.mp4?s=mp4-640x640-is&k=20&c=8oO5H9Y38JrCI5L6Vd8Z4zOADRdRGrRr6QO8joSutJA="
-    autoPlay
-    muted
-    loop
-    playsInline
-  />
-</section>
+ <section className="relative w-full h-[450px] bg-white overflow-hidden flex justify-center items-center">
+      {/* Video */}
+      <video
+        key={videoList[current]} // force reload
+        ref={videoRef}
+        className="w-full h-full object-contain z-10 transition-all duration-700 ease-in-out"
+        src={videoList[current]}
+        autoPlay
+        muted
+        loop={false} // loop should be false so it ends and changes
+        playsInline
+        onEnded={handleVideoEnd}
+      />
+
+      {/* Dots */}
+      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+        {videoList.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrent(index)}
+            className={`w-2 h-2 rounded-full ${
+              index === current ? "bg-black scale-110" : "bg-white"
+            } transition-transform duration-300`}
+          />
+        ))}
+      </div>
+    </section>
+
+<style>
+  {`
+    @keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+    100% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  `}
+</style>
+
+
+
 
       {/* Section 2 - Food Offers */}
       <section className="py-10 px-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-2xl font-semibold text-orange-600">Food Offers</h3>
-          <div className="flex gap-4">
-            <button
-              onClick={() => setPriceAsc(!priceAsc)}
-              className="bg-orange-100 text-orange-600 px-3 py-1 rounded font-medium text-sm"
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-2xl font-semibold text-orange-600">Food Offers</h3>
+    <div className="flex gap-4">
+      <button
+        onClick={() => setPriceAsc(!priceAsc)}
+        className="bg-orange-100 text-orange-600 px-3 py-1 rounded font-medium text-sm"
+      >
+        Price: {priceAsc ? "Low to High" : "High to Low"}
+      </button>
+      <label className="relative inline-flex items-center cursor-pointer">
+    <input
+      type="checkbox"
+      checked={vegOnly}
+      onChange={() => setVegOnly(!vegOnly)}
+      className="sr-only peer"
+    />
+    <div
+      className={`w-14 h-8 rounded-full transition-colors duration-300 ${
+        vegOnly ? "bg-green-400" : "bg-red-500"
+      }`}
+    ></div>
+    <div className="absolute left-1 top-1 w-6 h-6 bg-white rounded-full flex items-center justify-center text-lg transition-transform duration-300 peer-checked:translate-x-6">
+      {vegOnly ? "🥦" : "🍗"}
+    </div>
+  </label>
+    </div>
+  </div>
+
+  {/* Food Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {filteredFoods
+      .filter((item) => item.offer) // ✅ Only show items with offer
+      .slice(0, visibleCount)       // ✅ Show only limited items
+      .map((item) => (
+        <div
+          key={item.id}
+          className="rounded-xl overflow-hidden shadow hover:shadow-md transition"
+        >
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-full h-40 object-cover"
+          />
+          <div className="p-4 space-y-1">
+            <div className="flex justify-between items-center">
+              <h4 className="font-semibold">{item.name}</h4>
+            </div>
+            <p className="text-sm text-gray-600">{item.description}</p>
+            <p className="text-orange-600 font-semibold">₹{item.price}</p>
+            <p
+              className={`text-xs font-medium ${
+                item.type === "veg" ? "text-green-600" : "text-red-600"
+              }`}
             >
-              Price: {priceAsc ? "Low to High" : "High to Low"}
-            </button>
-            <label className="flex items-center text-sm gap-1">
-              <input
-                type="checkbox"
-                checked={vegOnly}
-                onChange={(e) => setVegOnly(e.target.checked)}
-              />
-              Veg Only
-            </label>
+              {item.type ? item.type.toUpperCase() : "UNKNOWN"}
+            </p>
+            <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded">
+                {item.offer}
+              </span>
           </div>
         </div>
+      ))}
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredFoods.map((item) => (
-            <div
-              key={item.id}
-              className="border rounded-xl overflow-hidden shadow hover:shadow-md transition"
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-4 space-y-1">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-semibold">{item.name}</h4>
-                  {item.offer && (
-                    <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded">
-                      {item.offer}
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-gray-600">{item.description}</p>
-                <p className="text-orange-600 font-semibold">₹{item.price}</p>
-                <p
-                  className={`text-xs font-medium ${
-                    item.type === "veg" ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                 <p className={`text-xs font-medium ${item.type === "veg" ? "text-green-600" : "text-red-600"}`}>
-  {item.type ? item.type.toUpperCase() : "UNKNOWN"}
-</p>
+  {/* Show More Button */}
+  {visibleCount <
+    filteredFoods.filter((item) => item.offer).length && (
+    <div className="text-center mt-6">
+      <button
+        onClick={() => setVisibleCount((prev) => prev + 4)}
+        className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition"
+      >
+        Show More
+      </button>
+    </div>
+  )}
+</section>
 
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Section 3 - Restaurants */}
       <section className="py-10 px-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-2xl font-semibold text-orange-600">Restaurants</h3>
+        <h3 className="text-2xl font-semibold text-orange-600">Restaurants Offer</h3>
         <button
-          onClick={() => setPriceAsc(!priceAsc)}
-          className="bg-orange-100 text-orange-600 px-3 py-1 rounded font-medium text-sm"
-        >
-          Price Level: {priceAsc ? "Low to High" : "High to Low"}
-        </button>
+        onClick={() => setPriceAsc(!priceAsc)}
+        className="bg-orange-100 text-orange-600 px-3 py-1 rounded font-medium text-sm"
+      >
+        Price: {priceAsc ? "high to low" : "low to high"}
+      </button>
+        
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
